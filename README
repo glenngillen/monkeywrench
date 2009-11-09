@@ -1,0 +1,7 @@
+Dependencies:
+
+HTTParty
+one of :
+yajl # sudo gem install brianmario-yajl-ruby
+  or
+json

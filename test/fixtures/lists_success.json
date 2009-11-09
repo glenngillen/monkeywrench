@@ -1,0 +1,14 @@
+[
+  {"id":"my-list-id",
+   "web_id":12345  ,
+   "name":"A test list",
+   "date_created":"2009-09-10 14:14:06",
+   "member_count":5,
+   "unsubscribe_count":0,
+   "cleaned_count":0,
+   "email_type_option":false,
+   "default_from_name":"John Smith",
+   "default_from_email":"johnsmith@acmecorp.com",
+   "default_subject":"",
+   "default_language":"eng"}
+]

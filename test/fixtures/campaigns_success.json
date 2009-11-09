@@ -1,0 +1,24 @@
+[{
+  "id":"ed7838c182",
+  "web_id":534402,
+  "list_id":null,
+  "folder_id":0,
+  "title":"Untitled",
+  "type":"regular",
+  "create_time":"2009-10-06 16:18:52",
+  "send_time":null,
+  "status":"save","from_name":null,
+  "from_email":null,
+  "subject":null,
+  "to_email":null,
+  "archive_url":"http:\/\/eepurl.com\/d2JN",
+  "emails_sent":0,
+  "inline_css":"N",
+  "analytics":"N",
+  "analytics_tag":"",
+  "track_clicks_text":false,
+  "track_clicks_html":true,
+  "track_opens":true,
+  "segment_opts":[]
+ }
+]
