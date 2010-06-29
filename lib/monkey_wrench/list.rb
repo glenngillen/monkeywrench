@@ -63,13 +63,23 @@ module MonkeyWrench
     # @option options [DateTime] :since Return all members whose status has changed or whose profile has changed since this date/time (in GMT).
     # @option options [Integer] :start (0) For large datasets, the page number to start at.
     # @option options [Integer] :limit (100) For large datasets, the number of results to return. Upper limit is set at 15000.
+    # @option options [Boolean] :full_details (true) Return full user details and not just email address and timestamp.
     # @return [Array<MonkeyWrench::Member>] 
     def members(options = {})
       if options[:since]
         options[:since] = options[:since].strftime("%Y-%m-%d %H:%M:%S")
       end
       options.merge!(:id => self.id, :method => "listMembers")
-      post(options)
+      response = post(options)
+      if options[:full_details]
+        response.map do |response_user|
+          member(response_user["email"])
+        end
+      else
+        response.map do |response_user|
+          MonkeyWrench::Member.new(response_user)
+        end
+      end
     end 
 
     # Enumerates over each member and executes the provided block. Will 
@@ -78,7 +88,7 @@ module MonkeyWrench
     #   list = MonkeyWrench.find("0a649eafc3")
     #   emails = []
     #   list.each_member do |member|
-    #     emails << member["email"]
+    #     emails << member.email
     #   end
     #
     # @param [Proc] &block code to execute for each member

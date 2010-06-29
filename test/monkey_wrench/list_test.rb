@@ -216,7 +216,9 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
     should "list members" do
       mock_chimp_post(:listMembers, :id => "my-list-id")
 
-      expected = [ {"timestamp"=>"2009-11-12 15:46:20", "email"=>"david@email.com"}, {"timestamp"=>"2009-11-12 15:52:52", "email"=>"julie@email.com"} ]
+      expected = [
+        MonkeyWrench::Member.new({"timestamp"=>"2009-11-12 15:46:20", "email"=>"david@email.com"}),
+        MonkeyWrench::Member.new({"timestamp"=>"2009-11-12 15:52:52", "email"=>"julie@email.com"}) ]
       assert_equal expected, @list.members
     end
 
@@ -226,10 +228,10 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
       mock_chimp_post(:listMembers, {:id => "my-list-id", :start => 2, :limit => 15000 }, true, 'listMembers_none')
 
       expected = [ 
-                  {"timestamp"=>"2009-11-12 15:46:20", "email"=>"david@email.com"}, 
-                  {"timestamp"=>"2009-11-12 15:52:52", "email"=>"julie@email.com"},
-                  {"timestamp"=>"2009-11-12 15:46:20", "email"=>"david@email.com"}, 
-                  {"timestamp"=>"2009-11-12 15:52:52", "email"=>"julie@email.com"}
+                  MonkeyWrench::Member.new({"timestamp"=>"2009-11-12 15:46:20", "email"=>"david@email.com"}), 
+                  MonkeyWrench::Member.new({"timestamp"=>"2009-11-12 15:52:52", "email"=>"julie@email.com"}),
+                  MonkeyWrench::Member.new({"timestamp"=>"2009-11-12 15:46:20", "email"=>"david@email.com"}), 
+                  MonkeyWrench::Member.new({"timestamp"=>"2009-11-12 15:52:52", "email"=>"julie@email.com"})
                  ]
       actual = []
       @list.each_member { |m| actual << m }
