@@ -26,10 +26,28 @@ module MonkeyWrench
         return { :success => 1, :errors => []}
       end
     end
+    
+    def unsubscribe(emails, opts = {})
+      params = { :method => "listBatchUnsubscribe", 
+                 :id => self.id }
+      params[:delete_member] = opts[:delete_member] if opts.has_key?(:delete_member)
+      params[:send_goodbye] = opts[:send_goodbye] if opts.has_key?(:send_goodbye)
+      params[:send_notify] = opts[:send_notify] if opts.has_key?(:send_notify)
+      params.merge!({ :emails => emails }.to_mailchimp)
+      response = post(params)
+      return { :success => response["success_count"],
+               :errors => response["errors"] }
+    end
+    
+    def opt_out(emails)
+      subscribe(emails)
+      unsubscribe(emails)
+    end
   
     private
       def self.reserved_keys
-        [:email, :type, :double_optin, :update_existing, :replace_interests, :send_welcome]
+        [:email, :type, :double_optin, :update_existing, :replace_interests, 
+         :send_welcome, :emails, :send_notify, :send_goodbye, :delete_member]
       end
       
       def subscribe_many(subscribers, opts = {})
@@ -59,7 +77,7 @@ module MonkeyWrench
           params.merge!(batch)
           response = post(params)
           return { :success => response["success_count"],
-                   :errors => response["errors"] }        
+                   :errors => response["errors"] }
         end
       end
 
