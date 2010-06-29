@@ -21,36 +21,25 @@ module MonkeyWrench
       end
 
       def get(params)
-        json = super(base_uri, :query => params.merge(default_options))
-        parse_json(json)
+        response = super(base_uri, :query => params.merge(default_options))
+        handle_errors(response.parsed_response)
       end
       
       def post(params)
-        json = super(base_uri, :query => params.merge(default_options))
-        parse_json(json)
-      end
-      
-      def parse_json(json)
-        return true if json == "true"
-        if Object.const_defined?("Yajl")
-          parser = Yajl::Parser.new
-          parsed = parser.parse(json.to_s)
-        else
-          parsed = JSON.parse(json)
-        end
-        objects = handle_errors(parsed)
-        objects
+        response = super(base_uri, :query => params.merge(default_options))
+        handle_errors(response.parsed_response)
       end
       
       def handle_errors(objects)
         return objects unless objects.respond_to?(:has_key?)
         
         if objects.has_key?("error")
-          objects.collect_kv!{|k,v| [k.sub("error","message"), v]}
-          objects.replace({ "error" => MonkeyWrench::Error.new(objects) })
+          objects.replace({ "error" => MonkeyWrench::Error.new(objects['error'], objects['code']) })
         elsif objects.has_key?("errors")
           objects["errors"] = objects["errors"].map do |err|
-            MonkeyWrench::Error.new(err)
+            message = err.delete('message')
+            code = err.delete('code')
+            MonkeyWrench::Error.new(message, code, err)
           end
         end
         objects

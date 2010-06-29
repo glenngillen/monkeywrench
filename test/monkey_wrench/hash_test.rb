@@ -1,4 +1,5 @@
-require File.dirname(__FILE__) + "/../test_helper"
+$:.unshift File.expand_path("..", File.dirname(__FILE__))
+require "test_helper"
 
 class MonkeyWrench::ListTest < Test::Unit::TestCase
   context "converting a flat hash to a Mailchimp structured array" do

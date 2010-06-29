@@ -1,0 +1,1 @@
+{"success_count":1,"error_count":1,"errors":[{"code":502,"message":"Invalid Email Address: bademail@badmail","row":{"EMAIL_TYPE":"html","EMAIL":"bademail@badmail"}}]}
