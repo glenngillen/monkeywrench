@@ -63,7 +63,7 @@ module MonkeyWrench
     # @option options [DateTime] :since Return all members whose status has changed or whose profile has changed since this date/time (in GMT).
     # @option options [Integer] :start (0) For large datasets, the page number to start at.
     # @option options [Integer] :limit (100) For large datasets, the number of results to return. Upper limit is set at 15000.
-    # @option options [Boolean] :full_details (true) Return full user details and not just email address and timestamp.
+    # @option options [Boolean] :full_details (true) Return full subscriber details and not just email address and timestamp.
     # @return [Array<MonkeyWrench::Member>] 
     def members(options = {})
       if options[:since]
@@ -103,7 +103,7 @@ module MonkeyWrench
         page += 1
       end
     end
-
+    
     def update_members(members, options = {})
       members = members.is_a?(Array) ? members : [members]
       options.merge!(:id => self.id, :method => "listUpdateMember")
@@ -115,7 +115,14 @@ module MonkeyWrench
         post(options.merge(mailchimp_args))
       end
     end
-
+    
+    # Find a member in this list with the given email address
+    #
+    #   list = MonkeyWrench::List.find("0a649eafc3")
+    #   list.member("glenn@rubypond.com")
+    #
+    # @param [String] email subscribers email address
+    # @return [MonkeyWrench::Member]
     def member(email)
       response = post(:id => self.id, :method => "listMemberInfo", :email_address => email)
       if response['error']
@@ -140,6 +147,20 @@ module MonkeyWrench
       end
     end
     
+    # Unsubscribers a person (or list of people) from the list
+    #
+    #   list = MonkeyWrench::List.find("0a649eafc3")
+    #   list.unsubscribe("glenn@rubypond.com", :send_goodbye => true) # Unsubscribe a single person
+    #
+    #   emails = ["glenn@rubypond.com", "me@glenngillen.com"]
+    #   list.unsubscribe(emails, :send_goodbye => true) # Unsubscribe multiple people at once
+    #
+    # @param [String, Array<String>] email address(es) of people to unsubscribe.
+    # @param [Hash] opts additional option to include when unsubscribing.
+    # @option opts [Boolean] :delete_member (false) completely delete the member from your list instead of just unsubscribing.
+    # @option opts [Boolean] :send_goodbye (true) send the goodbye email to the email addresses.
+    # @option opts [Boolean] :send_notify (false) send the unsubscribe notification email to the address defined in the list email notification settings.
+    # @return [Hash] contains 2 keys. :success contains the number of successful actions, :error a list of all errors.
     def unsubscribe(emails, opts = {})
       emails = [*emails]
       params = { :method => "listBatchUnsubscribe", 
@@ -153,6 +174,16 @@ module MonkeyWrench
                :errors => response["errors"] }
     end
     
+    # Will flag the email(s) as opted-out for all future mailing for this list
+    #
+    #   list = MonkeyWrench::List.find("0a649eafc3")
+    #   list.opt_out("glenn@rubypond.com") # Opt-out a single person
+    #
+    #   emails = ["glenn@rubypond.com", "me@glenngillen.com"]
+    #   list.opt_out(emails) # Opt-out multiple people at once
+    #
+    # @param [String, Array<String>] email address(es) of people to opt-out.
+    # @return [Hash] contains 2 keys. :success contains the number of successful actions, :error a list of all errors.
     def opt_out(emails)
       emails = [*emails]      
       subscribe(emails.map{|email| { :email => email }})

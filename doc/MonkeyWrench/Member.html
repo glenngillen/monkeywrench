@@ -93,6 +93,27 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#%3D%3D-instance_method" title="#== (instance method)">- (Object) <strong>==</strong>(other_member) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#initialize-instance_method" title="#initialize (instance method)">- (Member) <strong>initialize</strong>(list_member_info) </a>
     
 
@@ -278,7 +299,35 @@ A new instance of Member
     
     
       <div class="method_details first">
-  <p class="signature first" id="interests-instance_method">
+  <p class="signature first" id="==-instance_method">
+  
+    - (<tt>Object</tt>) <strong>==</strong>(other_member) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+29
+30
+31</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/member.rb', line 29</span>
+
+<span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id other_member'>other_member</span><span class='rparen'>)</span>
+  <span class='op'>!</span><span class='ivar'>@list_member_info</span><span class='period'>.</span><span class='id keys'>keys</span><span class='period'>.</span><span class='id detect'>detect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id key'>key</span><span class='op'>|</span> <span class='id send'>send</span><span class='lparen'>(</span><span class='id key'>key</span><span class='rparen'>)</span> <span class='op'>!=</span> <span class='id other_member'>other_member</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='id key'>key</span><span class='rparen'>)</span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="interests-instance_method">
   
     - (<tt>Object</tt>) <strong>interests</strong> 
   
@@ -369,7 +418,7 @@ A new instance of Member
 </div>
     
     <div id="footer">
-  Generated on Tue Jun 29 15:29:21 2010 by 
+  Generated on Tue Jun 29 16:06:27 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
   0.5.8 (ruby-1.9.2).
 </div>
