@@ -2,30 +2,54 @@ require 'cgi'
 
 module MonkeyWrench
   class List < MonkeyWrench::Base
-    
+
+    # Finds a given list by name
+    #
+    # @param [String] list_name the list name
+    # @return [MonkeyWrench::List] the first list found with a matching name
     def self.find_by_name(list_name)
       lists = find_all.detect{|list| list.name == list_name}
     end
-
+    
+    # Will compare the another list against the current one and return true if 
+    # they are the same
+    #
+    # @param [MonkeyWrench::List] other_list Other list to compare against
+    # @return [Boolean]
     def ==(other_list)
       other_list.is_a?(self.class) && self.id == other_list.id
     end
 
+    # Finds a given list by ID
+    #
+    # @param [String] id the unique Mailchimp list ID
+    # @return [MonkeyWrench::List] the list
     def self.find(id)
       new(:id => id)
     end
     
+    # Finds all lists
+    #
+    # @return [Array] an array of MonkeyWrench::List objects
     def self.find_all
       lists = post({ :method => "lists" }).map do |list|
         List.new(list)
       end
     end
-
+    
+    # Returns all members for this list
+    #
+    # @param [Hash] options additional option to include when searching
+    # @return [Array] an array of MonkeyWrench::Member objects
     def members(options = {})
       options.merge!(:id => self.id, :method => "listMembers")
       post(options)
     end 
 
+    # Enumerates over each member and executes the provided block. Will 
+    # automatically page and batch requests for members.
+    #
+    # @param [Proc] &block code to execute for each member
     def each_member(&block) 
       page = 0
       loop do
