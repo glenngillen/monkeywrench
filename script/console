@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+require 'optparse'
+
+irb = RUBY_PLATFORM =~ /(:?mswin|mingw)/ ? 'irb.bat' : 'irb'
+root = File.expand_path("..", File.dirname(__FILE__))
+
+libs =  " -r irb/completion"
+libs << %( -r "#{root}/lib/monkey_wrench")
+libs << %( -r "#{root}/script/auto_config")
+
+exec "#{irb} #{libs} --simple-prompt"

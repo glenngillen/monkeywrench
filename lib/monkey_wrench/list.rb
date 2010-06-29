@@ -5,6 +5,8 @@ module MonkeyWrench
 
     # Finds a given list by name
     #
+    #   MonkeyWrench.find_by_name("My Example List")
+    #
     # @param [String] list_name the list name
     # @return [MonkeyWrench::List] the first list found with a matching name
     def self.find_by_name(list_name)
@@ -14,6 +16,11 @@ module MonkeyWrench
     # Will compare the another list against the current one and return true if 
     # they are the same
     #
+    #   list1 = MonkeyWrench.find("0a649eafc3")
+    #   list2 = MonkeyWrench.find("9f9d54a0c4")
+    #   list3 = MonkeyWrench.find("0a649eafc3") # Same as list1!!
+    #   list1 == list2 # false
+    #   list1 == list3 # true
     # @param [MonkeyWrench::List] other_list Other list to compare against
     # @return [Boolean]
     def ==(other_list)
@@ -21,6 +28,8 @@ module MonkeyWrench
     end
 
     # Finds a given list by ID
+    #
+    #   MonkeyWrench::List.find("0a649eafc3")
     #
     # @param [String] id the unique Mailchimp list ID
     # @return [MonkeyWrench::List] the list
@@ -30,24 +39,47 @@ module MonkeyWrench
     
     # Finds all lists
     #
-    # @return [Array] an array of MonkeyWrench::List objects
+    #   MonkeyWrench::List.find_all
+    #
+    # @return [Array<MonkeyWrench::List>] 
     def self.find_all
       lists = post({ :method => "lists" }).map do |list|
         List.new(list)
       end
     end
+    class << self
+      alias :all :find_all
+    end
     
     # Returns all members for this list
     #
-    # @param [Hash] options additional option to include when searching
-    # @return [Array] an array of MonkeyWrench::Member objects
+    # For example, to find all members that have unsubscribed in the last 24 hours:
+    #
+    #   MonkeyWrench.members(:status => "unsubscribed",
+    #                        :since => Time.now - 86400)
+    #
+    # @param [Hash] options additional option to include when searching.
+    # @option options [String] :status ('subscribed') Filter the list members by status. Can be one of the following: "subscribed", "unsubscribed", "cleaned", "updated".
+    # @option options [DateTime] :since Return all members whose status has changed or whose profile has changed since this date/time (in GMT).
+    # @option options [Integer] :start (0) For large datasets, the page number to start at.
+    # @option options [Integer] :limit (100) For large datasets, the number of results to return. Upper limit is set at 15000.
+    # @return [Array<MonkeyWrench::Member>] 
     def members(options = {})
+      if options[:since]
+        options[:since] = options[:since].strftime("%Y-%m-%d %H:%M:%S")
+      end
       options.merge!(:id => self.id, :method => "listMembers")
       post(options)
     end 
 
     # Enumerates over each member and executes the provided block. Will 
     # automatically page and batch requests for members.
+    #
+    #   list = MonkeyWrench.find("0a649eafc3")
+    #   emails = []
+    #   list.each_member do |member|
+    #     emails << member["email"]
+    #   end
     #
     # @param [Proc] &block code to execute for each member
     def each_member(&block) 

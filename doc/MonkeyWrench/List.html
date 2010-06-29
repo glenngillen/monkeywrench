@@ -127,9 +127,11 @@ Finds a given list by ID.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#find_all-class_method" title="find_all (class method)">+ (Array) <strong>find_all</strong> </a>
+      <a href="#find_all-class_method" title="find_all (class method)">+ (Array&lt;MonkeyWrench::List&gt;) <strong>find_all</strong> </a>
     
 
+    
+      (also: all)
     
   </span>
   
@@ -254,7 +256,7 @@ Enumerates over each member and executes the provided block.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#members-instance_method" title="#members (instance method)">- (Array) <strong>members</strong>(options = {}) </a>
+      <a href="#members-instance_method" title="#members (instance method)">- (Array&lt;MonkeyWrench::Member&gt;) <strong>members</strong>(options = {}) </a>
     
 
     
@@ -392,6 +394,8 @@ Returns all members for this list.
     <p>
 Finds a given list by ID
 </p>
+<pre class="code">
+  <span class='const'>MonkeyWrench</span><span class='op'>::</span><span class='const'>List</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0a649eafc3</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></pre>
 
 
   </div>
@@ -444,12 +448,12 @@ the list
       <pre class="lines">
 
 
-27
-28
-29</pre>
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='id id'>id</span><span class='rparen'>)</span>
   <span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='id id'>id</span><span class='rparen'>)</span>
@@ -462,15 +466,21 @@ the list
       <div class="method_details ">
   <p class="signature " id="find_all-class_method">
   
-    + (<tt><a href="Array.html" title="MonkeyWrench::Array (module)">Array</a></tt>) <strong>find_all</strong> 
+    + (<tt><a href="Array.html" title="MonkeyWrench::Array (module)">Array</a>&lt;<a href="" title="MonkeyWrench::List (class)">MonkeyWrench::List</a>&gt;</tt>) <strong>find_all</strong> 
   
 
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='all-class_method'>all</span></span>
+    </span>
   
 </p><div class="docstring">
   <div class="discussion">
     <p>
 Finds all lists
 </p>
+<pre class="code">
+  <span class='const'>MonkeyWrench</span><span class='op'>::</span><span class='const'>List</span><span class='period'>.</span><span class='id find_all'>find_all</span></pre>
 
 
   </div>
@@ -481,16 +491,10 @@ Finds all lists
   
     <li>
       
-        <span class='type'>(<tt><a href="Array.html" title="MonkeyWrench::Array (module)">Array</a></tt>)</span>
+        <span class='type'>(<tt><a href="Array.html" title="MonkeyWrench::Array (module)">Array</a>&lt;<a href="" title="MonkeyWrench::List (class)">MonkeyWrench::List</a>&gt;</tt>)</span>
       
       
       
-      
-        &mdash;
-        <div class='inline'><p>
-an array of MonkeyWrench::List objects
-</p>
-</div>
       
     </li>
   
@@ -502,14 +506,14 @@ an array of MonkeyWrench::List objects
       <pre class="lines">
 
 
-34
-35
-36
-37
-38</pre>
+45
+46
+47
+48
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id find_all'>find_all</span>
   <span class='id lists'>lists</span> <span class='op'>=</span> <span class='id post'>post</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='symbol'>:method</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lists</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id list'>list</span><span class='op'>|</span>
@@ -533,6 +537,8 @@ an array of MonkeyWrench::List objects
     <p>
 Finds a given list by name
 </p>
+<pre class="code">
+  <span class='const'>MonkeyWrench</span><span class='period'>.</span><span class='id find_by_name'>find_by_name</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>My Example List</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></pre>
 
 
   </div>
@@ -585,12 +591,12 @@ the first list found with a matching name
       <pre class="lines">
 
 
-10
-11
-12</pre>
+12
+13
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 10</span>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 12</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id find_by_name'>find_by_name</span><span class='lparen'>(</span><span class='id list_name'>list_name</span><span class='rparen'>)</span>
   <span class='id lists'>lists</span> <span class='op'>=</span> <span class='id find_all'>find_all</span><span class='period'>.</span><span class='id detect'>detect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id list'>list</span><span class='op'>|</span> <span class='id list'>list</span><span class='period'>.</span><span class='id name'>name</span> <span class='op'>==</span> <span class='id list_name'>list_name</span><span class='rbrace'>}</span>
@@ -619,6 +625,12 @@ the first list found with a matching name
 Will compare the another list against the current one and return true if 
 they are the same
 </p>
+<pre class="code">
+  <span class='id list1'>list1</span> <span class='op'>=</span> <span class='const'>MonkeyWrench</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0a649eafc3</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id list2'>list2</span> <span class='op'>=</span> <span class='const'>MonkeyWrench</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>9f9d54a0c4</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id list3'>list3</span> <span class='op'>=</span> <span class='const'>MonkeyWrench</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0a649eafc3</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='comment'># Same as list1!!
+</span>  <span class='id list1'>list1</span> <span class='op'>==</span> <span class='id list2'>list2</span> <span class='comment'># false
+</span>  <span class='id list1'>list1</span> <span class='op'>==</span> <span class='id list3'>list3</span> <span class='comment'># true</span></pre>
 
 
   </div>
@@ -665,12 +677,12 @@ Other list to compare against
       <pre class="lines">
 
 
-19
-20
-21</pre>
+26
+27
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id other_list'>other_list</span><span class='rparen'>)</span>
   <span class='id other_list'>other_list</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id id'>id</span> <span class='op'>==</span> <span class='id other_list'>other_list</span><span class='period'>.</span><span class='id id'>id</span>
@@ -693,6 +705,12 @@ Other list to compare against
 Enumerates over each member and executes the provided block. Will 
 automatically page and batch requests for members.
 </p>
+<pre class="code">
+  <span class='id list'>list</span> <span class='op'>=</span> <span class='const'>MonkeyWrench</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0a649eafc3</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id emails'>emails</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id list'>list</span><span class='period'>.</span><span class='id each_member'>each_member</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id member'>member</span><span class='op'>|</span>
+    <span class='id emails'>emails</span> <span class='op'>&lt;&lt;</span> <span class='id member'>member</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>email</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='kw'>end</span></pre>
 
 
   </div>
@@ -726,20 +744,20 @@ code to execute for each member
       <pre class="lines">
 
 
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63</pre>
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='id each_member'>each_member</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span> 
   <span class='id page'>page</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -770,17 +788,17 @@ code to execute for each member
       <pre class="lines">
 
 
-77
-78
-79
-80
-81
-82
-83
-84</pre>
+109
+110
+111
+112
+113
+114
+115
+116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 109</span>
 
 <span class='kw'>def</span> <span class='id member'>member</span><span class='lparen'>(</span><span class='id email'>email</span><span class='rparen'>)</span>
   <span class='id response'>response</span> <span class='op'>=</span> <span class='id post'>post</span><span class='lparen'>(</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id id'>id</span><span class='comma'>,</span> <span class='symbol'>:method</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>listMemberInfo</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:email_address</span> <span class='op'>=&gt;</span> <span class='id email'>email</span><span class='rparen'>)</span>
@@ -798,7 +816,7 @@ code to execute for each member
       <div class="method_details ">
   <p class="signature " id="members-instance_method">
   
-    - (<tt><a href="Array.html" title="MonkeyWrench::Array (module)">Array</a></tt>) <strong>members</strong>(options = {}) 
+    - (<tt><a href="Array.html" title="MonkeyWrench::Array (module)">Array</a>&lt;<a href="Member.html" title="MonkeyWrench::Member (class)">MonkeyWrench::Member</a>&gt;</tt>) <strong>members</strong>(options = {}) 
   
 
   
@@ -807,6 +825,13 @@ code to execute for each member
     <p>
 Returns all members for this list
 </p>
+<p>
+For example, to find all members that have unsubscribed in the last 24
+hours:
+</p>
+<pre class="code">
+  <span class='const'>MonkeyWrench</span><span class='period'>.</span><span class='id members'>members</span><span class='lparen'>(</span><span class='symbol'>:status</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>unsubscribed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                       <span class='symbol'>:since</span> <span class='op'>=&gt;</span> <span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span> <span class='op'>-</span> <span class='int'>86400</span><span class='rparen'>)</span></pre>
 
 
   </div>
@@ -828,28 +853,94 @@ Returns all members for this list
       
         &mdash;
         <div class='inline'><p>
-additional option to include when searching
+additional option to include when searching.
 </p>
 </div>
       
     </li>
   
 </ul>
+
+  
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="name">:status</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>'subscribed'</tt>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+Filter the list members by status. Can be one of the following:
+&#8220;subscribed&#8221;, &#8220;unsubscribed&#8221;,
+&#8220;cleaned&#8221;, &#8220;updated&#8221;.
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>DateTime</tt>)</span>
+          <span class="name">:since</span>
+          <span class="default">
+            
+              <span class="na">N/A</span>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+Return all members whose status has changed or whose profile has changed
+since this date/time (in GMT).
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="name">:start</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>0</tt>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+For large datasets, the page number to start at.
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="name">:limit</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>100</tt>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+For large datasets, the number of results to return. Upper limit is set at
+15000.
+</p>
+</div>
+        </tr>
+      
+    </ul>
+  
 <h3>Returns:</h3>
 <ul class="return">
   
     <li>
       
-        <span class='type'>(<tt><a href="Array.html" title="MonkeyWrench::Array (module)">Array</a></tt>)</span>
+        <span class='type'>(<tt><a href="Array.html" title="MonkeyWrench::Array (module)">Array</a>&lt;<a href="Member.html" title="MonkeyWrench::Member (class)">MonkeyWrench::Member</a>&gt;</tt>)</span>
       
       
       
-      
-        &mdash;
-        <div class='inline'><p>
-an array of `MonkeyWrench::Member` objects
-</p>
-</div>
       
     </li>
   
@@ -861,15 +952,21 @@ an array of `MonkeyWrench::Member` objects
       <pre class="lines">
 
 
-44
-45
-46
-47</pre>
+67
+68
+69
+70
+71
+72
+73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 67</span>
 
 <span class='kw'>def</span> <span class='id members'>members</span><span class='lparen'>(</span><span class='id options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:since</span><span class='rbracket'>]</span>
+    <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:since</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:since</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id strftime'>strftime</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%Y-%m-%d %H:%M:%S</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
   <span class='id options'>options</span><span class='period'>.</span><span class='id merge!'>merge!</span><span class='lparen'>(</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id id'>id</span><span class='comma'>,</span> <span class='symbol'>:method</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>listMembers</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='id post'>post</span><span class='lparen'>(</span><span class='id options'>options</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -891,14 +988,14 @@ an array of `MonkeyWrench::Member` objects
       <pre class="lines">
 
 
-114
-115
-116
-117
-118</pre>
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 114</span>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 146</span>
 
 <span class='kw'>def</span> <span class='id opt_out'>opt_out</span><span class='lparen'>(</span><span class='id emails'>emails</span><span class='rparen'>)</span>
   <span class='id emails'>emails</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='op'>*</span><span class='id emails'>emails</span><span class='rbracket'>]</span>      
@@ -923,23 +1020,23 @@ an array of `MonkeyWrench::Member` objects
       <pre class="lines">
 
 
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99</pre>
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 86</span>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 118</span>
 
 <span class='kw'>def</span> <span class='id subscribe'>subscribe</span><span class='lparen'>(</span><span class='id contact_details'>contact_details</span><span class='comma'>,</span> <span class='id opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id contact_details'>contact_details</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Array</span><span class='rparen'>)</span>
@@ -973,21 +1070,21 @@ an array of `MonkeyWrench::Member` objects
       <pre class="lines">
 
 
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112</pre>
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 133</span>
 
 <span class='kw'>def</span> <span class='id unsubscribe'>unsubscribe</span><span class='lparen'>(</span><span class='id emails'>emails</span><span class='comma'>,</span> <span class='id opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id emails'>emails</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='op'>*</span><span class='id emails'>emails</span><span class='rbracket'>]</span>
@@ -1019,20 +1116,20 @@ an array of `MonkeyWrench::Member` objects
       <pre class="lines">
 
 
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75</pre>
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 97</span>
 
 <span class='kw'>def</span> <span class='id update_members'>update_members</span><span class='lparen'>(</span><span class='id members'>members</span><span class='comma'>,</span> <span class='id options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id members'>members</span> <span class='op'>=</span> <span class='id members'>members</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Array</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id members'>members</span> <span class='op'>:</span> <span class='lbracket'>[</span><span class='id members'>members</span><span class='rbracket'>]</span>
@@ -1055,7 +1152,7 @@ an array of `MonkeyWrench::Member` objects
 </div>
     
     <div id="footer">
-  Generated on Tue Jun 29 14:05:09 2010 by 
+  Generated on Tue Jun 29 15:29:21 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
   0.5.8 (ruby-1.9.2).
 </div>
