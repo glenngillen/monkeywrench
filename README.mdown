@@ -1,5 +1,5 @@
 # MonkeyWrench
-MonkeyWrench is a rubyesque API for interfacing with [Mailchimp](http://www.mailchimp.com).
+MonkeyWrench is a rubyesque API for interfacing with [Mailchimp](http://www.mailchimp.com) (or show me some love by registering [via my affiliate link](http://eepurl.com/Ge71)).
 
 ## Getting Started
 
