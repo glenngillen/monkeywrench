@@ -6,7 +6,7 @@ module MonkeyWrench
     # Finds a given list by name
     # 
     # @example
-    #   MonkeyWrench.find_by_name("My Example List")
+    #   MonkeyWrench::List.find_by_name("My Example List")
     #
     # @param [String] list_name the list name
     # @return [MonkeyWrench::List] the first list found with a matching name
@@ -18,9 +18,9 @@ module MonkeyWrench
     # they are the same (based on list ID)
     #
     # @example
-    #   list1 = MonkeyWrench.find("0a649eafc3")
-    #   list2 = MonkeyWrench.find("9f9d54a0c4")
-    #   list3 = MonkeyWrench.find("0a649eafc3") # Same as list1!!
+    #   list1 = MonkeyWrench::List.find("0a649eafc3")
+    #   list2 = MonkeyWrench::List.find("9f9d54a0c4")
+    #   list3 = MonkeyWrench::List.find("0a649eafc3") # Same as list1!!
     #   list1 == list2 # false
     #   list1 == list3 # true
     # @param [MonkeyWrench::List] other_list Other list to compare against
@@ -89,7 +89,7 @@ module MonkeyWrench
     # automatically page and batch requests for members.
     #
     # @example
-    #   list = MonkeyWrench.find("0a649eafc3")
+    #   list = MonkeyWrench::List.find("0a649eafc3")
     #   emails = []
     #   list.each_member do |member|
     #     emails << member.email

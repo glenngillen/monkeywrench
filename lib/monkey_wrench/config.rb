@@ -13,6 +13,9 @@ module MonkeyWrench
     # Hash:
     #   { :datacenter => "us1", :apikey => "your-api-key-goes-here"}
     #
+    # @example
+    #     MonkeyWrench::Config.new(:datacenter => "us1", 
+    #                              :apikey => "your-api-key-goes-here")
     #
     # @param [String, Hash] credentials accepts either a String pointing to a file
     # containing the credentials, or a hash of credentials. 
