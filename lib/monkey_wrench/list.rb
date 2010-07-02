@@ -4,7 +4,8 @@ module MonkeyWrench
   class List < MonkeyWrench::Base
 
     # Finds a given list by name
-    #
+    # 
+    # @example
     #   MonkeyWrench.find_by_name("My Example List")
     #
     # @param [String] list_name the list name
@@ -13,9 +14,10 @@ module MonkeyWrench
       lists = find_all.detect{|list| list.name == list_name}
     end
     
-    # Will compare the another list against the current one and return true if 
-    # they are the same
+    # Will compare another list against the current one and return true if 
+    # they are the same (based on list ID)
     #
+    # @example
     #   list1 = MonkeyWrench.find("0a649eafc3")
     #   list2 = MonkeyWrench.find("9f9d54a0c4")
     #   list3 = MonkeyWrench.find("0a649eafc3") # Same as list1!!
@@ -29,6 +31,7 @@ module MonkeyWrench
 
     # Finds a given list by ID
     #
+    # @example
     #   MonkeyWrench::List.find("0a649eafc3")
     #
     # @param [String] id the unique Mailchimp list ID
@@ -39,6 +42,7 @@ module MonkeyWrench
     
     # Finds all lists
     #
+    # @example
     #   MonkeyWrench::List.find_all
     #
     # @return [Array<MonkeyWrench::List>] 
@@ -53,8 +57,7 @@ module MonkeyWrench
     
     # Returns all members for this list
     #
-    # For example, to find all members that have unsubscribed in the last 24 hours:
-    #
+    # @example Find all members that have unsubscribed in the last 24 hours:
     #   MonkeyWrench.members(:status => "unsubscribed",
     #                        :since => Time.now - 86400)
     #
@@ -63,7 +66,7 @@ module MonkeyWrench
     # @option options [DateTime] :since Return all members whose status has changed or whose profile has changed since this date/time (in GMT).
     # @option options [Integer] :start (0) For large datasets, the page number to start at.
     # @option options [Integer] :limit (100) For large datasets, the number of results to return. Upper limit is set at 15000.
-    # @option options [Boolean] :full_details (true) Return full subscriber details and not just email address and timestamp.
+    # @option options [Boolean] :full_details (true) Return full member details and not just email address and timestamp.
     # @return [Array<MonkeyWrench::Member>] 
     def members(options = {})
       if options[:since]
@@ -85,6 +88,7 @@ module MonkeyWrench
     # Enumerates over each member and executes the provided block. Will 
     # automatically page and batch requests for members.
     #
+    # @example
     #   list = MonkeyWrench.find("0a649eafc3")
     #   emails = []
     #   list.each_member do |member|
@@ -104,6 +108,27 @@ module MonkeyWrench
       end
     end
     
+    # Updates details of list members
+    #
+    # @example Update a single member's email address
+    #   list = MonkeyWrench::List.find("0a649eafc3")
+    #   member = {:email => "foo@bar.com", :new_email => "bar@foo.com"}
+    #   list.update_members(member)
+    #
+    # @example Update multiple members' email addresses
+    #   list = MonkeyWrench::List.find("0a649eafc3")
+    #   members = [{:email => "foo@bar.com", :new_email => "bar@foo.com"},
+    #              {:email => "bob@bar.com", :new_email => "bob@foo.com"}]
+    #   list.update_members(members)
+    #
+    # @param [Hash, Array<Hash>] members details of member(s) to update details 
+    #   of. Members are matched based on the value of :email, to update the 
+    #   email address assign the new address to :new_email. All other field 
+    #   names are lowercase symbols representing the MERGEVAR name in 
+    #   Mailchimp (e.g., FNAME is :fname)
+    # @param [Hash] options additional options when updating members.
+    # @option options [String] :email_type Change the email type preference for the member ('html', 'text', or 'mobile').
+    # @option options [Boolean] :replace_interests (true) replace the interest groups provided (will append interest groups to existing values when false).
     def update_members(members, options = {})
       members = members.is_a?(Array) ? members : [members]
       options.merge!(:id => self.id, :method => "listUpdateMember")
@@ -118,10 +143,11 @@ module MonkeyWrench
     
     # Find a member in this list with the given email address
     #
+    # @example
     #   list = MonkeyWrench::List.find("0a649eafc3")
     #   list.member("glenn@rubypond.com")
     #
-    # @param [String] email subscribers email address
+    # @param [String] email members email address
     # @return [MonkeyWrench::Member]
     def member(email)
       response = post(:id => self.id, :method => "listMemberInfo", :email_address => email)
@@ -132,6 +158,27 @@ module MonkeyWrench
       end
     end
 
+    # Subscribes a new member to the list
+    #
+    # @example Subscribe a new email address
+    #   list.subscribe("foo@bar.com")
+    #
+    # @example Subscribe a new member with extended details
+    #   list.subscribe({:email => "foo@bar.com", :type => :html})
+    #
+    # @example Subscribe multiple new members
+    #   subscribers = [{:email => "foo@bar.com", :type => :html},
+    #                  {:email => "bar@foo.com", :type => :html}]
+    #   list.subscribe(subscribe, :send_welcome => true, :double_optin => false)
+    #
+    # @param [String, Hash, Array<Hash>] contact_details the email address or hash of values for the new member
+    # @param [Hash] opts options when adding new member
+    # @option opts [Boolean] :send_welcome (false) if :double_optin if false and this is 
+    #   true, send the lists 'Welcome Email' to the member(s). Will not send email if 
+    #  updating an existing member.
+    # @option opts [Boolean] :double_optin (true) send an opt-in confirmation email
+    # @option opts [Boolean] :update_existing (false) update members that are already subscribed to the list or to return an error (false returns error)
+    # @option opts [Boolean] :replace_interests (true) replace interest groups or append to existing interest groups (false appends to groups)
     def subscribe(contact_details, opts = {})
       if contact_details.is_a?(Array)
         return subscribe_many(contact_details, opts)
@@ -147,11 +194,13 @@ module MonkeyWrench
       end
     end
     
-    # Unsubscribers a person (or list of people) from the list
+    # Unsubscribes a person (or list of people) from the list
     #
+    # @example Unsubscribe a single user
     #   list = MonkeyWrench::List.find("0a649eafc3")
     #   list.unsubscribe("glenn@rubypond.com", :send_goodbye => true) # Unsubscribe a single person
     #
+    # @example Unsubscribe a list of users
     #   emails = ["glenn@rubypond.com", "me@glenngillen.com"]
     #   list.unsubscribe(emails, :send_goodbye => true) # Unsubscribe multiple people at once
     #
@@ -176,9 +225,11 @@ module MonkeyWrench
     
     # Will flag the email(s) as opted-out for all future mailing for this list
     #
+    # @example Opt-out a single user
     #   list = MonkeyWrench::List.find("0a649eafc3")
     #   list.opt_out("glenn@rubypond.com") # Opt-out a single person
     #
+    # @example Opt-out a list of users
     #   emails = ["glenn@rubypond.com", "me@glenngillen.com"]
     #   list.opt_out(emails) # Opt-out multiple people at once
     #
