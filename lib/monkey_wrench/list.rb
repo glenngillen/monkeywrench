@@ -321,7 +321,7 @@ module MonkeyWrench
                   :update_existing => opts.delete(:update_existing),
                   :replace_interests => opts.delete(:replace_interests),
                   :send_welcome => opts.delete(:send_welcome),
-                  :email => email_address
+                  :email_address => email_address
                  }
         params.reject!{ |k,v| v.nil? }
         merge_vars = { :merge_vars => opts }.to_mailchimp
