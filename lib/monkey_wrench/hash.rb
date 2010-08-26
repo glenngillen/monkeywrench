@@ -40,6 +40,15 @@ module MonkeyWrench
           else
             v = { k => v }.to_mailchimp(nil, k)
           end
+        elsif v.is_a?(Array)
+          results = {}
+          i = 0
+          v.each do |val|
+            keyname = CGI.escape("#{k}[#{i}]")
+            results[keyname] = val
+            i += 1
+          end
+          v = results
         end
         k = k.to_s
         k = "[#{index}][#{k.upcase}]" if index

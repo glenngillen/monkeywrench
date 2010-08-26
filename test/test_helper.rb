@@ -27,13 +27,13 @@ class Test::Unit::TestCase
     params.merge!({ :method => remote_method, :output => :json, :apikey => api})
     form_params = map_form_params(params).gsub(/%5([b-d])/) {|s| s.upcase}  
     uri = "http://#{dc}.api.mailchimp.com/1.2/?#{form_params}"
-    response = File.read(json_fixture_path(fixture, is_success))    
+    response = File.read(json_fixture_path(fixture, is_success))
     store_response(uri, params, response)
-    FakeWeb.register_uri(method, uri, { :body => response })
+    FakeWeb.register_uri(method, uri, { :body => response, :content_type => 'application/json' })
   end
   
-  def mock_chimp_post(method, params = {}, is_success = true)
-    mock_response(:post, "my-key", "my-dc", method, params, method, is_success)
+  def mock_chimp_post(method, params = {}, is_success = true, fixture = nil)
+    mock_response(:post, "my-key", "my-dc", method, params, fixture || method, is_success)
   end
   
   def store_response(uri, params, response)

@@ -10,6 +10,7 @@ module MonkeyWrench
       end
       @@apikey = config[:apikey]
       @@datacenter = config[:datacenter]
+      @@dryrun = config[:dryrun] || false
       super({})
     end
   end

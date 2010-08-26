@@ -10,6 +10,7 @@ module MonkeyWrench
 
     @@apikey = nil
     @@datacenter = nil
+    @@dryrun = false
     
     class << self
       def default_options
@@ -21,36 +22,33 @@ module MonkeyWrench
       end
 
       def get(params)
-        json = super(base_uri, :query => params.merge(default_options))
-        parse_json(json)
+        if @@dryrun
+          puts "GET #{base_uri} #{params.merge(default_options).inspect}"
+          return {}
+        else
+          handle_errors(super(base_uri, :query => params.merge(default_options)))
+        end
       end
       
       def post(params)
-        json = super(base_uri, :query => params.merge(default_options))
-        parse_json(json)
-      end
-      
-      def parse_json(json)
-        return true if json == "true"
-        if Object.const_defined?("Yajl")
-          parser = Yajl::Parser.new
-          parsed = parser.parse(json.to_s)
+        if @@dryrun
+          puts "POST #{base_uri} #{params.merge(default_options).inspect}"
+          return {}
         else
-          parsed = JSON.parse(json)
+          handle_errors(super(base_uri, :query => params.merge(default_options)))
         end
-        objects = handle_errors(parsed)
-        objects
       end
       
       def handle_errors(objects)
         return objects unless objects.respond_to?(:has_key?)
         
         if objects.has_key?("error")
-          objects.collect_kv!{|k,v| [k.sub("error","message"), v]}
-          objects.replace({ "error" => MonkeyWrench::Error.new(objects) })
+          objects.replace({ "error" => MonkeyWrench::Error.new(objects['error'], objects['code']) })
         elsif objects.has_key?("errors")
           objects["errors"] = objects["errors"].map do |err|
-            MonkeyWrench::Error.new(err)
+            message = err.delete('message')
+            code = err.delete('code')
+            MonkeyWrench::Error.new(message, code, err)
           end
         end
         objects
