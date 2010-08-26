@@ -1,4 +1,5 @@
-require File.dirname(__FILE__) + "/../test_helper"
+$:.unshift File.expand_path("..", File.dirname(__FILE__))
+require "test_helper"
 
 class MonkeyWrench::ListTest < Test::Unit::TestCase
   context "subscribing to a list" do
@@ -215,7 +216,9 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
     should "list members" do
       mock_chimp_post(:listMembers, :id => "my-list-id")
 
-      expected = [ {"timestamp"=>"2009-11-12 15:46:20", "email"=>"david@wordtracker.com"}, {"timestamp"=>"2009-11-12 15:52:52", "email"=>"julie@wordtracker.com"} ]
+      expected = [
+        MonkeyWrench::Member.new({"timestamp"=>"2009-11-12 15:46:20", "email"=>"david@email.com"}),
+        MonkeyWrench::Member.new({"timestamp"=>"2009-11-12 15:52:52", "email"=>"julie@email.com"}) ]
       assert_equal expected, @list.members
     end
 
@@ -225,10 +228,10 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
       mock_chimp_post(:listMembers, {:id => "my-list-id", :start => 2, :limit => 15000 }, true, 'listMembers_none')
 
       expected = [ 
-                  {"timestamp"=>"2009-11-12 15:46:20", "email"=>"david@wordtracker.com"}, 
-                  {"timestamp"=>"2009-11-12 15:52:52", "email"=>"julie@wordtracker.com"},
-                  {"timestamp"=>"2009-11-12 15:46:20", "email"=>"david@wordtracker.com"}, 
-                  {"timestamp"=>"2009-11-12 15:52:52", "email"=>"julie@wordtracker.com"}
+                  MonkeyWrench::Member.new({"timestamp"=>"2009-11-12 15:46:20", "email"=>"david@email.com"}), 
+                  MonkeyWrench::Member.new({"timestamp"=>"2009-11-12 15:52:52", "email"=>"julie@email.com"}),
+                  MonkeyWrench::Member.new({"timestamp"=>"2009-11-12 15:46:20", "email"=>"david@email.com"}), 
+                  MonkeyWrench::Member.new({"timestamp"=>"2009-11-12 15:52:52", "email"=>"julie@email.com"})
                  ]
       actual = []
       @list.each_member { |m| actual << m }
@@ -285,20 +288,20 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
     end
 
     should "return the info" do
-      form_params = {:email_address => "david@wordtracker.com", :id => "my-list-id"}
+      form_params = {:email_address => "david@email.com", :id => "my-list-id"}
       mock_chimp_post(:listMemberInfo, form_params)
-      member = @list.member("david@wordtracker.com")
-      assert_equal "david@wordtracker.com", member.email
+      member = @list.member("david@email.com")
+      assert_equal "david@email.com", member.email
       assert_equal "html", member.email_type
       assert_equal "David", member.fname
       assert_equal ["freetrial", "tutorials"], member.interests
     end
 
    should "raise on error" do
-     form_params = {:email_address => "david@wordtracker.com", :id => "my-list-id"}
+     form_params = {:email_address => "david@email.com", :id => "my-list-id"}
      mock_chimp_post(:listMemberInfo, form_params, false)
      assert_raises(MonkeyWrench::Error) do
-       @list.member("david@wordtracker.com")
+       @list.member("david@email.com")
      end
    end
 

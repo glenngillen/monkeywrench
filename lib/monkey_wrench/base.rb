@@ -26,7 +26,8 @@ module MonkeyWrench
           puts "GET #{base_uri} #{params.merge(default_options).inspect}"
           return {}
         else
-          handle_errors(super(base_uri, :query => params.merge(default_options)))
+          response = super(base_uri, :query => params.merge(default_options))
+          handle_errors(response.parsed_response)
         end
       end
       
@@ -35,7 +36,8 @@ module MonkeyWrench
           puts "POST #{base_uri} #{params.merge(default_options).inspect}"
           return {}
         else
-          handle_errors(super(base_uri, :query => params.merge(default_options)))
+          response = super(base_uri, :query => params.merge(default_options))
+          handle_errors(response.parsed_response)
         end
       end
       

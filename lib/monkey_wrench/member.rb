@@ -25,5 +25,9 @@ module MonkeyWrench
         @list_member_info['merges'].has_key?(key_name) ||
         @list_member_info['merges'].has_key?(key_name.upcase)
     end
+    
+    def ==(other_member)
+      !@list_member_info.keys.detect{|key| send(key) != other_member.send(key)}
+    end
   end
 end

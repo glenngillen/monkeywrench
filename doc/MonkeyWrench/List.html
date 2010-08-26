@@ -1,0 +1,1786 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: MonkeyWrench::List</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (L)</a> &raquo; 
+    <span class='title'><a href="../MonkeyWrench.html" title="MonkeyWrench (module)">MonkeyWrench</a></span>
+     &raquo; 
+    <span class="title">List</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: MonkeyWrench::List
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><a href="Base.html" title="MonkeyWrench::Base (class)">Base</a></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">OpenStruct</li>
+          
+            <li class="next"><a href="Base.html" title="MonkeyWrench::Base (class)">Base</a></li>
+          
+            <li class="next">MonkeyWrench::List</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/monkey_wrench/list.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+
+  
+  
+  
+  
+  
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find-class_method" title="find (class method)">+ (MonkeyWrench::List) <strong>find</strong>(id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Finds a given list by ID.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find_all-class_method" title="find_all (class method)">+ (Array&lt;MonkeyWrench::List&gt;) <strong>find_all</strong> </a>
+    
+
+    
+      (also: all)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Finds all lists.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find_by_name-class_method" title="find_by_name (class method)">+ (MonkeyWrench::List) <strong>find_by_name</strong>(list_name) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Finds a given list by name.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#%3D%3D-instance_method" title="#== (instance method)">- (Boolean) <strong>==</strong>(other_list) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Will compare another list against the current one and return true if  they
+are the same (based on list ID).
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each_member-instance_method" title="#each_member (instance method)">- (Object) <strong>each_member</strong>(&amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Enumerates over each member and executes the provided block.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#member-instance_method" title="#member (instance method)">- (MonkeyWrench::Member) <strong>member</strong>(email) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Find a member in this list with the given email address.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#members-instance_method" title="#members (instance method)">- (Array&lt;MonkeyWrench::Member&gt;) <strong>members</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns all members for this list.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#opt_out-instance_method" title="#opt_out (instance method)">- (Hash) <strong>opt_out</strong>(emails) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Will flag the email(s) as opted-out for all future mailing for this list.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#subscribe-instance_method" title="#subscribe (instance method)">- (Object) <strong>subscribe</strong>(contact_details, opts = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Subscribes a new member to the list.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unsubscribe-instance_method" title="#unsubscribe (instance method)">- (Hash) <strong>unsubscribe</strong>(emails, opts = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Unsubscribes a person (or list of people) from the list.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_members-instance_method" title="#update_members (instance method)">- (Object) <strong>update_members</strong>(members, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Updates details of list members.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <a href="Base.html" title="MonkeyWrench::Base (class)">Base</a></h3>
+  <p class="inherited"><a href="Base.html#apikey-class_method" title="MonkeyWrench::Base.apikey (method)">apikey</a>, <a href="Base.html#base_uri-class_method" title="MonkeyWrench::Base.base_uri (method)">base_uri</a>, <a href="Base.html#datacenter-class_method" title="MonkeyWrench::Base.datacenter (method)">datacenter</a>, <a href="Base.html#default_options-class_method" title="MonkeyWrench::Base.default_options (method)">default_options</a>, <a href="Base.html#get-class_method" title="MonkeyWrench::Base.get (method)">get</a>, <a href="Base.html#handle_errors-class_method" title="MonkeyWrench::Base.handle_errors (method)">handle_errors</a>, <a href="Base.html#post-class_method" title="MonkeyWrench::Base.post (method)">post</a></p>
+
+  
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="find-class_method">
+  
+    + (<tt><a href="" title="MonkeyWrench::List (class)">MonkeyWrench::List</a></tt>) <strong>find</strong>(id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Finds a given list by ID
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'></div></h4>
+      <pre class="example code"><span class='const'>MonkeyWrench</span><span class='op'>::</span><span class='const'>List</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0a649eafc3</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></pre>
+    
+  </div>
+<h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <span class='name'>id</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the unique Mailchimp list ID
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="" title="MonkeyWrench::List (class)">MonkeyWrench::List</a></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the list
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 39</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='id id'>id</span><span class='rparen'>)</span>
+  <span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='id id'>id</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="find_all-class_method">
+  
+    + (<tt><a href="Array.html" title="MonkeyWrench::Array (module)">Array</a>&lt;<a href="" title="MonkeyWrench::List (class)">MonkeyWrench::List</a>&gt;</tt>) <strong>find_all</strong> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='all-class_method'>all</span></span>
+    </span>
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Finds all lists
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'></div></h4>
+      <pre class="example code"><span class='const'>MonkeyWrench</span><span class='op'>::</span><span class='const'>List</span><span class='period'>.</span><span class='id find_all'>find_all</span></pre>
+    
+  </div>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Array.html" title="MonkeyWrench::Array (module)">Array</a>&lt;<a href="" title="MonkeyWrench::List (class)">MonkeyWrench::List</a>&gt;</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+49
+50
+51
+52
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 49</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id find_all'>find_all</span>
+  <span class='id lists'>lists</span> <span class='op'>=</span> <span class='id post'>post</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='symbol'>:method</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lists</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id list'>list</span><span class='op'>|</span>
+    <span class='const'>List</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id list'>list</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="find_by_name-class_method">
+  
+    + (<tt><a href="" title="MonkeyWrench::List (class)">MonkeyWrench::List</a></tt>) <strong>find_by_name</strong>(list_name) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Finds a given list by name
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'></div></h4>
+      <pre class="example code"><span class='const'>MonkeyWrench</span><span class='period'>.</span><span class='id find_by_name'>find_by_name</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>My Example List</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></pre>
+    
+  </div>
+<h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <span class='name'>list_name</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the list name
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="" title="MonkeyWrench::List (class)">MonkeyWrench::List</a></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the first list found with a matching name
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id find_by_name'>find_by_name</span><span class='lparen'>(</span><span class='id list_name'>list_name</span><span class='rparen'>)</span>
+  <span class='id lists'>lists</span> <span class='op'>=</span> <span class='id find_all'>find_all</span><span class='period'>.</span><span class='id detect'>detect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id list'>list</span><span class='op'>|</span> <span class='id list'>list</span><span class='period'>.</span><span class='id name'>name</span> <span class='op'>==</span> <span class='id list_name'>list_name</span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="==-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>==</strong>(other_list) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Will compare another list against the current one and return true if  they
+are the same (based on list ID)
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'></div></h4>
+      <pre class="example code"><span class='id list1'>list1</span> <span class='op'>=</span> <span class='const'>MonkeyWrench</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0a649eafc3</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id list2'>list2</span> <span class='op'>=</span> <span class='const'>MonkeyWrench</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>9f9d54a0c4</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id list3'>list3</span> <span class='op'>=</span> <span class='const'>MonkeyWrench</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0a649eafc3</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='comment'># Same as list1!!
+</span><span class='id list1'>list1</span> <span class='op'>==</span> <span class='id list2'>list2</span> <span class='comment'># false
+</span><span class='id list1'>list1</span> <span class='op'>==</span> <span class='id list3'>list3</span> <span class='comment'># true</span></pre>
+    
+  </div>
+<h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="" title="MonkeyWrench::List (class)">MonkeyWrench::List</a></tt>)</span>
+      
+      
+        <span class='name'>other_list</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Other list to compare against
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 28</span>
+
+<span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id other_list'>other_list</span><span class='rparen'>)</span>
+  <span class='id other_list'>other_list</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id id'>id</span> <span class='op'>==</span> <span class='id other_list'>other_list</span><span class='period'>.</span><span class='id id'>id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="each_member-instance_method">
+  
+    - (<tt>Object</tt>) <strong>each_member</strong>(&amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Enumerates over each member and executes the provided block. Will 
+automatically page and batch requests for members.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'></div></h4>
+      <pre class="example code"><span class='id list'>list</span> <span class='op'>=</span> <span class='const'>MonkeyWrench</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0a649eafc3</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id emails'>emails</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+<span class='id list'>list</span><span class='period'>.</span><span class='id each_member'>each_member</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id member'>member</span><span class='op'>|</span>
+  <span class='id emails'>emails</span> <span class='op'>&lt;&lt;</span> <span class='id member'>member</span><span class='period'>.</span><span class='id email'>email</span>
+<span class='kw'>end</span></pre>
+    
+  </div>
+<h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+        <span class='name'>&amp;block</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+code to execute for each member
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 99</span>
+
+<span class='kw'>def</span> <span class='id each_member'>each_member</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span> 
+  <span class='id page'>page</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='id loop'>loop</span> <span class='kw'>do</span>
+    <span class='id batch'>batch</span> <span class='op'>=</span> <span class='id members'>members</span><span class='lparen'>(</span><span class='symbol'>:start</span> <span class='op'>=&gt;</span> <span class='id page'>page</span><span class='comma'>,</span> <span class='symbol'>:limit</span> <span class='op'>=&gt;</span> <span class='int'>15000</span><span class='rparen'>)</span>
+    <span class='kw'>break</span> <span class='kw'>if</span> <span class='id batch'>batch</span><span class='period'>.</span><span class='id empty?'>empty?</span>
+    <span class='id batch'>batch</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id member'>member</span><span class='op'>|</span>
+      <span class='kw'>yield</span> <span class='id member'>member</span>
+    <span class='kw'>end</span>
+    <span class='id page'>page</span> <span class='op'>+=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="member-instance_method">
+  
+    - (<tt><a href="Member.html" title="MonkeyWrench::Member (class)">MonkeyWrench::Member</a></tt>) <strong>member</strong>(email) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Find a member in this list with the given email address
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'></div></h4>
+      <pre class="example code"><span class='id list'>list</span> <span class='op'>=</span> <span class='const'>MonkeyWrench</span><span class='op'>::</span><span class='const'>List</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0a649eafc3</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id list'>list</span><span class='period'>.</span><span class='id member'>member</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>glenn@rubypond.com</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></pre>
+    
+  </div>
+<h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <span class='name'>email</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+members email address
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Member.html" title="MonkeyWrench::Member (class)">MonkeyWrench::Member</a></tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+152
+153
+154
+155
+156
+157
+158
+159</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 152</span>
+
+<span class='kw'>def</span> <span class='id member'>member</span><span class='lparen'>(</span><span class='id email'>email</span><span class='rparen'>)</span>
+  <span class='id response'>response</span> <span class='op'>=</span> <span class='id post'>post</span><span class='lparen'>(</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id id'>id</span><span class='comma'>,</span> <span class='symbol'>:method</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>listMemberInfo</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:email_address</span> <span class='op'>=&gt;</span> <span class='id email'>email</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id response'>response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>error</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+    <span class='id raise'>raise</span> <span class='id response'>response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>error</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+  <span class='kw'>else</span>
+    <span class='const'>MonkeyWrench</span><span class='op'>::</span><span class='const'>Member</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id response'>response</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="members-instance_method">
+  
+    - (<tt><a href="Array.html" title="MonkeyWrench::Array (module)">Array</a>&lt;<a href="Member.html" title="MonkeyWrench::Member (class)">MonkeyWrench::Member</a>&gt;</tt>) <strong>members</strong>(options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns all members for this list
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+Find all members that have unsubscribed in the last 24 hours:
+</p>
+</div></h4>
+      <pre class="example code"><span class='const'>MonkeyWrench</span><span class='period'>.</span><span class='id members'>members</span><span class='lparen'>(</span><span class='symbol'>:status</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>unsubscribed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                     <span class='symbol'>:since</span> <span class='op'>=&gt;</span> <span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span> <span class='op'>-</span> <span class='int'>86400</span><span class='rparen'>)</span></pre>
+    
+  </div>
+<h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Hash.html" title="MonkeyWrench::Hash (module)">Hash</a></tt>)</span>
+      
+      
+        <span class='name'>options</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+additional option to include when searching.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="name">:status</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>'subscribed'</tt>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+Filter the list members by status. Can be one of the following:
+&#8220;subscribed&#8221;, &#8220;unsubscribed&#8221;,
+&#8220;cleaned&#8221;, &#8220;updated&#8221;.
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>DateTime</tt>)</span>
+          <span class="name">:since</span>
+          <span class="default">
+            
+              <span class="na">N/A</span>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+Return all members whose status has changed or whose profile has changed
+since this date/time (in GMT).
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="name">:start</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>0</tt>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+For large datasets, the page number to start at.
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="name">:limit</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>100</tt>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+For large datasets, the number of results to return. Upper limit is set at
+15000.
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="name">:full_details</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>true</tt>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+Return full member details and not just email address and timestamp.
+</p>
+</div>
+        </tr>
+      
+    </ul>
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Array.html" title="MonkeyWrench::Array (module)">Array</a>&lt;<a href="Member.html" title="MonkeyWrench::Member (class)">MonkeyWrench::Member</a>&gt;</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 71</span>
+
+<span class='kw'>def</span> <span class='id members'>members</span><span class='lparen'>(</span><span class='id options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:since</span><span class='rbracket'>]</span>
+    <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:since</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:since</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id strftime'>strftime</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%Y-%m-%d %H:%M:%S</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id options'>options</span><span class='period'>.</span><span class='id merge!'>merge!</span><span class='lparen'>(</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id id'>id</span><span class='comma'>,</span> <span class='symbol'>:method</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>listMembers</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id response'>response</span> <span class='op'>=</span> <span class='id post'>post</span><span class='lparen'>(</span><span class='id options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:full_details</span><span class='rbracket'>]</span>
+    <span class='id response'>response</span><span class='period'>.</span><span class='id map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id response_user'>response_user</span><span class='op'>|</span>
+      <span class='id member'>member</span><span class='lparen'>(</span><span class='id response_user'>response_user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>email</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>else</span>
+    <span class='id response'>response</span><span class='period'>.</span><span class='id map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id response_user'>response_user</span><span class='op'>|</span>
+      <span class='const'>MonkeyWrench</span><span class='op'>::</span><span class='const'>Member</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id response_user'>response_user</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="opt_out-instance_method">
+  
+    - (<tt><a href="Hash.html" title="MonkeyWrench::Hash (module)">Hash</a></tt>) <strong>opt_out</strong>(emails) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Will flag the email(s) as opted-out for all future mailing for this list
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+Opt-out a single user
+</p>
+</div></h4>
+      <pre class="example code"><span class='id list'>list</span> <span class='op'>=</span> <span class='const'>MonkeyWrench</span><span class='op'>::</span><span class='const'>List</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0a649eafc3</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id list'>list</span><span class='period'>.</span><span class='id opt_out'>opt_out</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>glenn@rubypond.com</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='comment'># Opt-out a single person</span></pre>
+    
+      <h4><div class='inline'><p>
+Opt-out a list of users
+</p>
+</div></h4>
+      <pre class="example code"><span class='id emails'>emails</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>glenn@rubypond.com</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>me@glenngillen.com</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='id list'>list</span><span class='period'>.</span><span class='id opt_out'>opt_out</span><span class='lparen'>(</span><span class='id emails'>emails</span><span class='rparen'>)</span> <span class='comment'># Opt-out multiple people at once</span></pre>
+    
+  </div>
+<h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>, <tt><a href="Array.html" title="MonkeyWrench::Array (module)">Array</a>&lt;String&gt;</tt>)</span>
+      
+      
+        <span class='name'>email</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+address(es) of people to opt-out.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Hash.html" title="MonkeyWrench::Hash (module)">Hash</a></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+contains 2 keys. :success contains the number of successful actions, :error
+a list of all errors.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+238
+239
+240
+241
+242</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 238</span>
+
+<span class='kw'>def</span> <span class='id opt_out'>opt_out</span><span class='lparen'>(</span><span class='id emails'>emails</span><span class='rparen'>)</span>
+  <span class='id emails'>emails</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='op'>*</span><span class='id emails'>emails</span><span class='rbracket'>]</span>      
+  <span class='id subscribe'>subscribe</span><span class='lparen'>(</span><span class='id emails'>emails</span><span class='period'>.</span><span class='id map'>map</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id email'>email</span><span class='op'>|</span> <span class='lbrace'>{</span> <span class='symbol'>:email</span> <span class='op'>=&gt;</span> <span class='id email'>email</span> <span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id unsubscribe'>unsubscribe</span><span class='lparen'>(</span><span class='id emails'>emails</span><span class='comma'>,</span> <span class='symbol'>:send_goodbye</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='symbol'>:send_notify</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="subscribe-instance_method">
+  
+    - (<tt>Object</tt>) <strong>subscribe</strong>(contact_details, opts = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Subscribes a new member to the list
+</p>
+<pre class="code">
+ updating an existing member.</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+Subscribe a new email address
+</p>
+</div></h4>
+      <pre class="example code"><span class='id list'>list</span><span class='period'>.</span><span class='id subscribe'>subscribe</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo@bar.com</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></pre>
+    
+      <h4><div class='inline'><p>
+Subscribe a new member with extended details
+</p>
+</div></h4>
+      <pre class="example code"><span class='id list'>list</span><span class='period'>.</span><span class='id subscribe'>subscribe</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='symbol'>:email</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo@bar.com</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:type</span> <span class='op'>=&gt;</span> <span class='symbol'>:html</span><span class='rbrace'>}</span><span class='rparen'>)</span></pre>
+    
+      <h4><div class='inline'><p>
+Subscribe multiple new members
+</p>
+</div></h4>
+      <pre class="example code"><span class='id subscribers'>subscribers</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='lbrace'>{</span><span class='symbol'>:email</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo@bar.com</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:type</span> <span class='op'>=&gt;</span> <span class='symbol'>:html</span><span class='rbrace'>}</span><span class='comma'>,</span>
+               <span class='lbrace'>{</span><span class='symbol'>:email</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bar@foo.com</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:type</span> <span class='op'>=&gt;</span> <span class='symbol'>:html</span><span class='rbrace'>}</span><span class='rbracket'>]</span>
+<span class='id list'>list</span><span class='period'>.</span><span class='id subscribe'>subscribe</span><span class='lparen'>(</span><span class='id subscribe'>subscribe</span><span class='comma'>,</span> <span class='symbol'>:send_welcome</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:double_optin</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='rparen'>)</span></pre>
+    
+  </div>
+<h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>, <tt><a href="Hash.html" title="MonkeyWrench::Hash (module)">Hash</a></tt>, <tt><a href="Array.html" title="MonkeyWrench::Array (module)">Array</a>&lt;<a href="Hash.html" title="MonkeyWrench::Hash (module)">Hash</a>&gt;</tt>)</span>
+      
+      
+        <span class='name'>contact_details</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the email address or hash of values for the new member
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Hash.html" title="MonkeyWrench::Hash (module)">Hash</a></tt>)</span>
+      
+      
+        <span class='name'>opts</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+options when adding new member
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <h3>Options Hash (<tt>opts</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="name">:send_welcome</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>false</tt>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+if :double_optin if false and this is  true, send the lists &#8216;Welcome
+Email&#8217; to the member(s). Will not send email if
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="name">:double_optin</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>true</tt>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+send an opt-in confirmation email
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="name">:update_existing</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>false</tt>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+update members that are already subscribed to the list or to return an
+error (false returns error)
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="name">:replace_interests</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>true</tt>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+replace interest groups or append to existing interest groups (false
+appends to groups)
+</p>
+</div>
+        </tr>
+      
+    </ul>
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 182</span>
+
+<span class='kw'>def</span> <span class='id subscribe'>subscribe</span><span class='lparen'>(</span><span class='id contact_details'>contact_details</span><span class='comma'>,</span> <span class='id opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id contact_details'>contact_details</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Array</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id subscribe_many'>subscribe_many</span><span class='lparen'>(</span><span class='id contact_details'>contact_details</span><span class='comma'>,</span> <span class='id opts'>opts</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='kw'>if</span> <span class='id contact_details'>contact_details</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
+      <span class='id email_address'>email_address</span> <span class='op'>=</span> <span class='id contact_details'>contact_details</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:email</span><span class='rparen'>)</span>
+      <span class='id opts'>opts</span> <span class='op'>=</span> <span class='id opts'>opts</span><span class='period'>.</span><span class='id merge'>merge</span><span class='lparen'>(</span><span class='id contact_details'>contact_details</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id email_address'>email_address</span> <span class='op'>=</span> <span class='id contact_details'>contact_details</span>
+    <span class='kw'>end</span>        
+    <span class='id subscribe_one'>subscribe_one</span><span class='lparen'>(</span><span class='id email_address'>email_address</span><span class='comma'>,</span> <span class='id opts'>opts</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='lbrace'>{</span> <span class='symbol'>:success</span> <span class='op'>=&gt;</span> <span class='int'>1</span><span class='comma'>,</span> <span class='symbol'>:errors</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="unsubscribe-instance_method">
+  
+    - (<tt><a href="Hash.html" title="MonkeyWrench::Hash (module)">Hash</a></tt>) <strong>unsubscribe</strong>(emails, opts = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Unsubscribes a person (or list of people) from the list
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+Unsubscribe a single user
+</p>
+</div></h4>
+      <pre class="example code"><span class='id list'>list</span> <span class='op'>=</span> <span class='const'>MonkeyWrench</span><span class='op'>::</span><span class='const'>List</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0a649eafc3</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id list'>list</span><span class='period'>.</span><span class='id unsubscribe'>unsubscribe</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>glenn@rubypond.com</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:send_goodbye</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='rparen'>)</span> <span class='comment'># Unsubscribe a single person</span></pre>
+    
+      <h4><div class='inline'><p>
+Unsubscribe a list of users
+</p>
+</div></h4>
+      <pre class="example code"><span class='id emails'>emails</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>glenn@rubypond.com</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>me@glenngillen.com</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='id list'>list</span><span class='period'>.</span><span class='id unsubscribe'>unsubscribe</span><span class='lparen'>(</span><span class='id emails'>emails</span><span class='comma'>,</span> <span class='symbol'>:send_goodbye</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='rparen'>)</span> <span class='comment'># Unsubscribe multiple people at once</span></pre>
+    
+  </div>
+<h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>, <tt><a href="Array.html" title="MonkeyWrench::Array (module)">Array</a>&lt;String&gt;</tt>)</span>
+      
+      
+        <span class='name'>email</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+address(es) of people to unsubscribe.
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Hash.html" title="MonkeyWrench::Hash (module)">Hash</a></tt>)</span>
+      
+      
+        <span class='name'>opts</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+additional option to include when unsubscribing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <h3>Options Hash (<tt>opts</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="name">:delete_member</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>false</tt>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+completely delete the member from your list instead of just unsubscribing.
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="name">:send_goodbye</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>true</tt>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+send the goodbye email to the email addresses.
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="name">:send_notify</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>false</tt>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+send the unsubscribe notification email to the address defined in the list
+email notification settings.
+</p>
+</div>
+        </tr>
+      
+    </ul>
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Hash.html" title="MonkeyWrench::Hash (module)">Hash</a></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+contains 2 keys. :success contains the number of successful actions, :error
+a list of all errors.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 213</span>
+
+<span class='kw'>def</span> <span class='id unsubscribe'>unsubscribe</span><span class='lparen'>(</span><span class='id emails'>emails</span><span class='comma'>,</span> <span class='id opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id emails'>emails</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='op'>*</span><span class='id emails'>emails</span><span class='rbracket'>]</span>
+  <span class='id params'>params</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:method</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>listBatchUnsubscribe</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> 
+             <span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id id'>id</span> <span class='rbrace'>}</span>
+  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:delete_member</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:delete_member</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id opts'>opts</span><span class='period'>.</span><span class='id has_key?'>has_key?</span><span class='lparen'>(</span><span class='symbol'>:delete_member</span><span class='rparen'>)</span>
+  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:send_goodbye</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:send_goodbye</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id opts'>opts</span><span class='period'>.</span><span class='id has_key?'>has_key?</span><span class='lparen'>(</span><span class='symbol'>:send_goodbye</span><span class='rparen'>)</span>
+  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:send_notify</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:send_notify</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id opts'>opts</span><span class='period'>.</span><span class='id has_key?'>has_key?</span><span class='lparen'>(</span><span class='symbol'>:send_notify</span><span class='rparen'>)</span>
+  <span class='id params'>params</span><span class='period'>.</span><span class='id merge!'>merge!</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='symbol'>:emails</span> <span class='op'>=&gt;</span> <span class='id emails'>emails</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id to_mailchimp'>to_mailchimp</span><span class='rparen'>)</span>
+  <span class='id response'>response</span> <span class='op'>=</span> <span class='id post'>post</span><span class='lparen'>(</span><span class='id params'>params</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='lbrace'>{</span> <span class='symbol'>:success</span> <span class='op'>=&gt;</span> <span class='id response'>response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>success_count</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+           <span class='symbol'>:errors</span> <span class='op'>=&gt;</span> <span class='id response'>response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>errors</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="update_members-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_members</strong>(members, options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Updates details of list members
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+Update a single member&#8217;s email address
+</p>
+</div></h4>
+      <pre class="example code"><span class='id list'>list</span> <span class='op'>=</span> <span class='const'>MonkeyWrench</span><span class='op'>::</span><span class='const'>List</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0a649eafc3</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id member'>member</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='symbol'>:email</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo@bar.com</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:new_email</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bar@foo.com</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span>
+<span class='id list'>list</span><span class='period'>.</span><span class='id update_members'>update_members</span><span class='lparen'>(</span><span class='id member'>member</span><span class='rparen'>)</span></pre>
+    
+      <h4><div class='inline'><p>
+Update multiple members&#8217; email addresses
+</p>
+</div></h4>
+      <pre class="example code"><span class='id list'>list</span> <span class='op'>=</span> <span class='const'>MonkeyWrench</span><span class='op'>::</span><span class='const'>List</span><span class='period'>.</span><span class='id find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0a649eafc3</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id members'>members</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='lbrace'>{</span><span class='symbol'>:email</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo@bar.com</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:new_email</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bar@foo.com</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='comma'>,</span>
+           <span class='lbrace'>{</span><span class='symbol'>:email</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bob@bar.com</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:new_email</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bob@foo.com</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='rbracket'>]</span>
+<span class='id list'>list</span><span class='period'>.</span><span class='id update_members'>update_members</span><span class='lparen'>(</span><span class='id members'>members</span><span class='rparen'>)</span></pre>
+    
+  </div>
+<h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Hash.html" title="MonkeyWrench::Hash (module)">Hash</a></tt>, <tt><a href="Array.html" title="MonkeyWrench::Array (module)">Array</a>&lt;<a href="Hash.html" title="MonkeyWrench::Hash (module)">Hash</a>&gt;</tt>)</span>
+      
+      
+        <span class='name'>members</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+details of member(s) to update details  of. Members are matched based on
+the value of :email, to update the  email address assign the new address to
+:new_email. All other field  names are lowercase symbols representing the
+MERGEVAR name in  Mailchimp (e.g., FNAME is :fname)
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Hash.html" title="MonkeyWrench::Hash (module)">Hash</a></tt>)</span>
+      
+      
+        <span class='name'>options</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+additional options when updating members.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="name">:email_type</span>
+          <span class="default">
+            
+              <span class="na">N/A</span>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+Change the email type preference for the member (&#8216;html&#8217;,
+&#8216;text&#8217;, or &#8216;mobile&#8217;).
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="name">:replace_interests</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>true</tt>
+            
+          </span>
+          &mdash;<div class='inline'><p>
+replace the interest groups provided (will append interest groups to
+existing values when false).
+</p>
+</div>
+        </tr>
+      
+    </ul>
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/monkey_wrench/list.rb', line 132</span>
+
+<span class='kw'>def</span> <span class='id update_members'>update_members</span><span class='lparen'>(</span><span class='id members'>members</span><span class='comma'>,</span> <span class='id options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id members'>members</span> <span class='op'>=</span> <span class='id members'>members</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Array</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id members'>members</span> <span class='op'>:</span> <span class='lbracket'>[</span><span class='id members'>members</span><span class='rbracket'>]</span>
+  <span class='id options'>options</span><span class='period'>.</span><span class='id merge!'>merge!</span><span class='lparen'>(</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id id'>id</span><span class='comma'>,</span> <span class='symbol'>:method</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>listUpdateMember</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id members'>members</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id member'>member</span><span class='op'>|</span>
+    <span class='id mailchimp_args'>mailchimp_args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='symbol'>:email_address</span> <span class='op'>=&gt;</span> <span class='id member'>member</span><span class='lbracket'>[</span><span class='symbol'>:email</span><span class='rbracket'>]</span><span class='rbrace'>}</span>
+    <span class='id member'>member</span><span class='lbracket'>[</span><span class='symbol'>:email</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id member'>member</span><span class='lbracket'>[</span><span class='symbol'>:new_email</span><span class='rbracket'>]</span>
+    <span class='id member'>member</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:new_email</span><span class='rparen'>)</span>
+    <span class='id mailchimp_args'>mailchimp_args</span><span class='period'>.</span><span class='id merge!'>merge!</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='symbol'>:merge_vars</span> <span class='op'>=&gt;</span> <span class='id member'>member</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id to_mailchimp'>to_mailchimp</span><span class='rparen'>)</span>
+    <span class='id post'>post</span><span class='lparen'>(</span><span class='id options'>options</span><span class='period'>.</span><span class='id merge'>merge</span><span class='lparen'>(</span><span class='id mailchimp_args'>mailchimp_args</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Fri Jul  2 11:36:12 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
+  0.5.8 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

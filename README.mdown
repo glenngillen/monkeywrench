@@ -1,0 +1,18 @@
+# MonkeyWrench
+MonkeyWrench is a rubyesque API for interfacing with [Mailchimp](http://www.mailchimp.com) (or show me some love by registering [via my affiliate link](http://eepurl.com/Ge71)).
+
+## Getting Started
+
+To get started, you need to first connect to the appropriate datacenter with your API key:
+
+    MonkeyWrench::Config.new(:datacenter => "us1", 
+                             :apikey => "your-api-key-goes-here")
+
+From there you've got a rich API for managing Lists and Members. To subscribe a new user to a list simply do the following:
+
+    list = MonkeyWrench::List.find_by_name("My Example List")
+    list.subscribe("foo@bar.com")
+    
+## Further Reading
+
+For more information, [check the documentation](http://rdoc.info/projects/rubypond/monkeywrench)
