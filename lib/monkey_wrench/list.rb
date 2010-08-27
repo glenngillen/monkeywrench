@@ -196,7 +196,7 @@ module MonkeyWrench
           opts = opts.merge(contact_details)
         else
           email_address = contact_details
-        end        
+        end
         subscribe_one(email_address, opts)
         return { :success => 1, :errors => []}
       end
@@ -263,14 +263,25 @@ module MonkeyWrench
         end
       end
 
-      def subscribe_in_batches(subscribers, opts)
-        cumulative_response = { :success => 0, :errors => [] }
+      def batch_size
+        5000
+      end
+
+      def each_batch(subscribers, batch_size, &block) 
         i = 0
         while i < subscribers.size
-          response = subscribe_one_batch(subscribers[i..i+9], opts)
-          cumulative_response[:success] += (response['success_count'] || 0)
-          cumulative_response[:errors] += (response['errors'] || [])
-          i += 10
+          start = Time.now
+          yield subscribers[i..(i+batch_size-1)], i
+          i += batch_size
+        end
+      end
+
+      def subscribe_in_batches(subscribers, opts)
+        cumulative_response = { :success => 0, :errors => [] }
+        each_batch(subscribers, batch_size) do |batch, i|
+          response = subscribe_one_batch(batch, opts)
+          cumulative_response[:success] += (response["success_count"] || 0)
+          cumulative_response[:errors] += (response["errors"] || [])
         end
         cumulative_response
       end
@@ -281,7 +292,12 @@ module MonkeyWrench
         params[:update_existing] = opts[:update_existing] if opts.has_key?(:update_existing)
         params[:replace_interests] = opts[:replace_interests] if opts.has_key?(:replace_interests)
         params.merge!({ :batch => subscribers }.to_mailchimp)
-        post(params)
+        post(params, :timeout => timeout_for_batch(subscribers))
+      end
+
+      def timeout_for_batch(batch)
+        # 5 mins for a batch of 5000
+        ((batch.size.to_f / 5000) * (5 * 60)).to_i
       end
 
       def subscribe_one_at_a_time(subscribers, opts)

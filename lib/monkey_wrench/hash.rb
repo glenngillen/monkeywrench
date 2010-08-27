@@ -21,7 +21,7 @@ module MonkeyWrench
     def escape_keys!
       collect_kv!{|k,v| [CGI.escape(k.to_s), v]}
     end
-    
+
     def to_mailchimp(index = nil, parent_name = nil)
       result = self.collect_kv do |k,v|
         if v.is_a?(Array) && v.first.is_a?(Hash)
@@ -35,7 +35,7 @@ module MonkeyWrench
           if parent_name
             v = v.collect_kv do |key,val| 
               keyname = CGI.escape("#{parent_name.to_s}[#{key.to_s.upcase}]")
-              [keyname, val]
+              [keyname, val.to_s]
             end
           else
             v = { k => v }.to_mailchimp(nil, k)
@@ -45,7 +45,7 @@ module MonkeyWrench
           i = 0
           v.each do |val|
             keyname = CGI.escape("#{k}[#{i}]")
-            results[keyname] = val
+            results[keyname] = val.to_s
             i += 1
           end
           v = results

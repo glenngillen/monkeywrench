@@ -2,66 +2,66 @@ require 'rubygems'
 require 'test/unit'
 require 'shoulda'
 require 'net/http'
+require 'mocha'
+require 'webmock/test_unit'
+require 'yajl/json_gem'
 
 begin 
   require "redgreen"
 rescue LoadError; 
 end
 
-require File.expand_path(File.dirname(__FILE__)) + '/lib/fakeweb/lib/fake_web'
-
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require "#{File.dirname(__FILE__)}/../lib/monkey_wrench"
 
-FakeWeb.allow_net_connect = false
-
 class Test::Unit::TestCase
+  include WebMock
+
   protected
 
   def setup_config
     MonkeyWrench::Config.new(:apikey => "my-key", :datacenter => "my-dc")
   end
-  
-  def mock_response(method, api, dc, remote_method, params, fixture, is_success)
-    params.merge!({ :method => remote_method, :output => :json, :apikey => api})
-    form_params = map_form_params(params).gsub(/%5([b-d])/) {|s| s.upcase}  
-    uri = "http://#{dc}.api.mailchimp.com/1.2/?#{form_params}"
-    response = File.read(json_fixture_path(fixture, is_success))
-    store_response(uri, params, response)
-    FakeWeb.register_uri(method, uri, { :body => response, :content_type => 'application/json' })
+
+  def uri_for_remote_method(remote_method) 
+    get_params = { :method => remote_method, :output => :json, :apikey => "my-key"}
+    query_string = map_form_params(get_params).gsub(/%5([b-d])/) {|s| s.upcase}
+    "http://my-dc.api.mailchimp.com/1.2/?#{query_string}"
+  end
+
+  def mock_chimp_posts(remote_method, sequence) 
+    uri = uri_for_remote_method(remote_method)
+    sequence.each do |response|
+      response_body = canned_response(fixture_filename(response[:fixture] || remote_method, response[:is_success]))
+      stub_request(:post, uri).with(:body => response[:params])
+        .to_return(:body => response_body, :headers => {'Content-Type' => 'application/json'})
+    end
+  end
+
+  def mock_chimp_post(remote_method, post_params = {}, is_success = true, fixture = nil)
+    mock_chimp_posts remote_method, [{:params => post_params, :is_success => is_success, :fixture => fixture}]
   end
   
-  def mock_chimp_post(method, params = {}, is_success = true, fixture = nil)
-    mock_response(:post, "my-key", "my-dc", method, params, fixture || method, is_success)
+  def escape(string)
+    URI.escape(string, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
   end
-  
-  def store_response(uri, params, response)
-    @stored_responses ||= {}
-    @stored_responses[uri] ||= {}
-    @stored_responses[uri][params.collect_kv{|k,v| [k.to_s, v.to_s]}.inspect] = response
-  end
-  
-  def get_response(uri, actual_params)
-    response = @stored_responses[uri][actual_params.inspect]
-    raise "Unable to handle request to #{uri} with params: #{actual_params.inspect}" unless response
-    response
-  end
-  
+
   def map_form_params(params)
-    request = Net::HTTP::Post.new("http://localhost/")
-    request.set_form_data(params)
-    request.body
+    params.map { |k,v| escape(k.to_s) + '=' + escape(v.to_s) }.join('&')
   end
 
-  def json_fixture_path(fixture, is_success)
-    response = is_success ? "success" : "fail"
-    File.join(File.dirname(__FILE__), "fixtures", "#{fixture}_#{response}.json")
+  def canned_response(filename)
+    File.read(fixture_path(filename))
+  end
+
+  def fixture_filename(fixture, is_success)
+    outcome = is_success ? "success" : "fail"
+    "#{fixture}_#{outcome}.json"
+  end
+
+  def fixture_path(filename)
+    File.join(File.dirname(__FILE__), "fixtures", filename)
   end
   
-  def clear_fakeweb
-    FakeWeb.clean_registry
-    FakeWeb.allow_net_connect = false
-  end
-
 end

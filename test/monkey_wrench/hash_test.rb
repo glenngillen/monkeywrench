@@ -43,5 +43,15 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
       assert @example_hash.to_mailchimp.keys.include?("vars%5BEMAIL_ADDRESS%5D")
       assert @example_hash.to_mailchimp.keys.include?("vars%5BTYPE%5D")
     end
+
+    should "convert symbols to strings" do
+      assert_equal @example_hash.to_mailchimp['vars%5BTYPE%5D'], 'html'
+    end
+
+    should_eventually "recursively convert hashes" do
+      example = { :a => { :b => { :c => 1 }}}
+      expected = {"a%5BV%5D%5BC%5D" => 1}
+      assert_equal expected, example.to_mailchimp
+    end
   end
 end

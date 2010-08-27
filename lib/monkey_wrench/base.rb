@@ -13,7 +13,7 @@ module MonkeyWrench
     @@dryrun = false
     
     class << self
-      def default_options
+      def default_query_params
         { :output => "json", :apikey=> @@apikey}
       end
       
@@ -21,23 +21,33 @@ module MonkeyWrench
         "http://#{datacenter}.api.mailchimp.com/1.2/"
       end
 
-      def get(params)
+      def default_retry_limit
+        3
+      end
+
+      def get(params, http_options = {})
         if @@dryrun
-          puts "GET #{base_uri} #{params.merge(default_options).inspect}"
+          puts "GET #{base_uri} #{params.merge(default_query_params).inspect}"
           return {}
         else
-          response = super(base_uri, :query => params.merge(default_options))
-          handle_errors(response.parsed_response)
+          robustly(http_options) do
+            response = super(base_uri, http_options.merge(:query => params.merge(default_query_params)))
+            handle_errors(response.parsed_response)
+          end
         end
       end
       
-      def post(params)
+      def post(params, http_options = {})
         if @@dryrun
-          puts "POST #{base_uri} #{params.merge(default_options).inspect}"
+          puts "POST #{base_uri} #{params.merge(default_query_params).inspect}"
           return {}
         else
-          response = super(base_uri, :query => params.merge(default_options))
-          handle_errors(response.parsed_response)
+          robustly(http_options) do
+            post_params = params.dup
+            get_params = default_query_params.merge(:method => post_params.delete(:method))
+            response = super(base_uri, http_options.merge(:body => post_params, :query => get_params))
+            handle_errors(response.parsed_response)
+          end
         end
       end
       
@@ -66,12 +76,27 @@ module MonkeyWrench
     end
     
     private
-      def get(params)
-        self.class.get(params)
+      def self.robustly(http_options, &block)
+        retry_limit = http_options[:retry_limit] || default_retry_limit
+        attempts = 0
+        while attempts < retry_limit
+          begin
+            attempts += 1
+            return yield
+          rescue Timeout::Error => e
+            if attempts == retry_limit
+              raise e
+            end
+          end
+        end
+      end
+
+      def get(*args)
+        self.class.get(*args)
       end
     
-      def post(params)
-        self.class.post(params)
+      def post(*args)
+        self.class.post(*args)
       end
     
   end

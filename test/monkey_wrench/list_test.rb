@@ -7,14 +7,15 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
       setup_config
       mock_chimp_post(:lists)
       @list = MonkeyWrench::List.find_by_name("A test list")
-      clear_fakeweb
     end
     
     context "multiple subscribers at once" do
       should "subscribe users" do
-        form_params = {"batch[0][EMAIL]" => "mail@chimp.com", 
-                  "batch[0][TYPE]" => "html", 
-                  :id => "my-list-id"}
+        form_params = {
+          :batch => [{'EMAIL' => "mail@chimp.com", 
+                       'TYPE' => "html"
+                     }],
+          :id => "my-list-id"}
         mock_chimp_post(:listBatchSubscribe, form_params)
 
         subscribers = [{:email => "mail@chimp.com", :type => :html}]    
@@ -22,34 +23,23 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
         assert_equal expected, @list.subscribe(subscribers)
       end
       
-      should "split more than ten subscribers into batches" do
-        first_batch = {:id => "my-list-id"}
-        subscribers = []
-        10.times do |i|
-          first_batch["batch[#{i}][EMAIL]"] = "mail#{i}@chimp.com"
-          first_batch["batch[#{i}][TYPE]"] = "html"
-          subscribers << {:email => "mail#{i}@chimp.com", :type => :html}
+      should "split more than five thousand subscribers into batches" do
+        subscribers = (1..5004).map do |i|
+          {:email => "mail#{i}@chimp.com", :type => :html}
         end
-        mock_chimp_post(:listBatchSubscribe, first_batch,
-                        true, 'listBatchSubscribe10')
-
-        second_batch = {:id => "my-list-id"}
-        5.times do |i|
-          second_batch["batch[#{i}][EMAIL]"] = "mail1#{i}@chimp.com"
-          second_batch["batch[#{i}][TYPE]"] = "html"
-          subscribers << {:email => "mail1#{i}@chimp.com", :type => :html}
-        end
-        mock_chimp_post(:listBatchSubscribe, second_batch,
-                        true, 'listBatchSubscribe5')
-
-        expected = {:success => 15, :errors => []}      
+        response_sequence = [
+                             {:body => canned_response('listBatchSubscribe5000_success.json'), :headers => {'Content-Type' => 'application/json'}},
+                             {:body => canned_response('listBatchSubscribe4_success.json'), :headers => {'Content-Type' => 'application/json'}}
+                            ]
+        stub_request(:post, uri_for_remote_method('listBatchSubscribe')).to_return(response_sequence)
+        expected = {:success => 5004, :errors => []}      
         assert_equal expected, @list.subscribe(subscribers)
       end
       
       should "send welcome email" do
-        form_params = {"merge_vars[FOO]" => "bar", :id => "my-list-id", 
-                       :email => "mail@chimp.com", :type => :html,
-                       :send_welcome => true}
+        form_params = {:merge_vars => {"FOO" => "bar"}, :id => "my-list-id", 
+                       :email => "mail@chimp.com", :type => "html",
+                       :send_welcome => "true"}
         mock_chimp_post(:listSubscribe, form_params)
 
         subscribers = [{:email => "mail@chimp.com", :type => :html, :foo => "bar"}]    
@@ -62,10 +52,10 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
 
       should "collate errors" do
         form_params = {
-          "batch[0][EMAIL]" => "mail@chimp.com", 
-          "batch[0][TYPE]" => "html", 
-          "batch[1][EMAIL]" => "bademail@badmail", 
-          "batch[1][TYPE]" => "html", 
+          :batch => [
+                     {'EMAIL' => "mail@chimp.com", 'TYPE' => 'html'},
+                     {'EMAIL' => "bademail@badmail", 'TYPE' => 'html'}
+                    ],
           :id => "my-list-id"}
         mock_chimp_post(:listBatchSubscribe, form_params, true, 'listBatchSubscribe_with_error')
 
@@ -84,14 +74,13 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
     
     context "a single subscriber" do
       should "subsbscibe a user" do
-        form_params = { :type=>:html, 
-                        :update_existing=>true, 
-                        "merge_vars[MY_DATE]"=>"20090101", 
-                        :replace_interests=>false, 
-                        :double_optin=>false, 
-                        "merge_vars[FNAME]"=>"Joe", 
+        form_params = { :type=> "html", 
+                        :update_existing => "true", 
+                        :merge_vars => {'MY_DATE'=>"20090101", 'FNAME' => 'Joe'},
+                        :replace_interests => "false", 
+                        :double_optin => "false", 
                         :id => "my-list-id",
-                        :send_welcome=>true,
+                        :send_welcome => "true",
                         :email => "mail@chimp.com" }
         mock_chimp_post(:listSubscribe, form_params)
 
@@ -119,7 +108,7 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
     
     context "multiple subscribers at once" do
       should "unsubscribe" do
-        form_params = {"emails[0]" => "mail@chimp.com", :id => "my-list-id"}      
+        form_params = {"emails" => ["mail@chimp.com"], :id => "my-list-id"}      
         mock_chimp_post(:listBatchUnsubscribe, form_params)
         subscribers = ["mail@chimp.com"]
       
@@ -128,8 +117,8 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
       end
       
       should "delete subscriber" do
-        form_params = {"emails[0]" => "mail@chimp.com", :id => "my-list-id",
-                       :delete_member => true}
+        form_params = {"emails" => ["mail@chimp.com"], :id => "my-list-id",
+                       :delete_member => "true"}
         mock_chimp_post(:listBatchUnsubscribe, form_params)
         subscribers = ["mail@chimp.com"]
       
@@ -138,8 +127,8 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
       end
       
       should "send goodbye" do
-        form_params = {"emails[0]" => "mail@chimp.com", :id => "my-list-id",
-                       :send_goodbye => true}
+        form_params = {"emails" => ["mail@chimp.com"], :id => "my-list-id",
+                       :send_goodbye => "true"}
         mock_chimp_post(:listBatchUnsubscribe, form_params)
         subscribers = ["mail@chimp.com"]
       
@@ -148,8 +137,8 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
       end
       
       should "send unsubscribe notification" do
-        form_params = {"emails[0]" => "mail@chimp.com", :id => "my-list-id",
-                       :send_notify => true}
+        form_params = {"emails" => ["mail@chimp.com"], :id => "my-list-id",
+                       :send_notify => "true"}
         mock_chimp_post(:listBatchUnsubscribe, form_params)
         subscribers = ["mail@chimp.com"]
       
@@ -160,7 +149,7 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
     
     context "a single subscriber" do
       should "unsubscribe" do
-        form_params = { "emails[0]" => "mail@chimp.com", :id => "my-list-id" }
+        form_params = { "emails" => ["mail@chimp.com"], :id => "my-list-id" }
         mock_chimp_post(:listBatchUnsubscribe, form_params)
 
         expected = {:success => 1, :errors => []}      
@@ -178,12 +167,14 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
     
     context "multiple subscribers at once" do
       should "opt out" do
-        form_params = { "batch[0][EMAIL]" => "mail@chimp.com", :id => "my-list-id",
-                        "batch[1][EMAIL]" => "foo@bar.com"}
+        form_params = { :batch => [
+                                   {'EMAIL' => "mail@chimp.com"},
+                                   {'EMAIL' => 'foo@bar.com'}
+                                  ], :id => "my-list-id"
+                      }
         mock_chimp_post(:listBatchSubscribe, form_params)
-        form_params = { "emails[0]" => "mail@chimp.com", :id => "my-list-id",
-                        "emails[1]" => "foo@bar.com",
-                        :send_goodbye => false, :send_notify => false }
+        form_params = { :emails => ["mail@chimp.com", "foo@bar.com"], :id => "my-list-id",
+                        :send_goodbye => "false", :send_notify => "false" }
         mock_chimp_post(:listBatchUnsubscribe, form_params)
         subscribers = ["mail@chimp.com", "foo@bar.com"]
       
@@ -194,10 +185,10 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
     
     context "a single subscriber" do
       should "opt out" do
-        form_params = { "batch[0][EMAIL]" => "mail@chimp.com", :id => "my-list-id" }
+        form_params = { :batch => [{"EMAIL" => "mail@chimp.com"}], :id => "my-list-id" }
         mock_chimp_post(:listBatchSubscribe, form_params)
-        form_params = { "emails[0]" => "mail@chimp.com", :id => "my-list-id", 
-                        :send_goodbye => false, :send_notify => false}
+        form_params = { :emails => ["mail@chimp.com"], :id => "my-list-id", 
+                        :send_goodbye => "false", :send_notify => "false"}
         mock_chimp_post(:listBatchUnsubscribe, form_params)
 
         expected = {:success => 1, :errors => []}      
@@ -223,9 +214,13 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
     end
 
     should "iterate over all members" do
-      mock_chimp_post(:listMembers, {:id => "my-list-id", :start => 0, :limit => 15000 }, true, 'listMembers')
-      mock_chimp_post(:listMembers, {:id => "my-list-id", :start => 1, :limit => 15000 }, true, 'listMembers')
-      mock_chimp_post(:listMembers, {:id => "my-list-id", :start => 2, :limit => 15000 }, true, 'listMembers_none')
+      response_sequence = %w{listMembers listMembers listMembers_none}.map do |fixture|
+        {
+          :body => canned_response("#{fixture}_success.json"),
+          :headers => {'Content-Type' => 'application/json'}
+        }
+      end
+      stub_request(:post, uri_for_remote_method('listMembers')).to_return(response_sequence)
 
       expected = [ 
                   MonkeyWrench::Member.new({"timestamp"=>"2009-11-12 15:46:20", "email"=>"david@email.com"}), 
@@ -249,32 +244,39 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
     should "accept single member's email address change as hash" do
       member = {:email => "foo@bar.com", :new_email => "bar@foo.com"}
       form_params = {:email_address => "foo@bar.com", 
-                     "merge_vars[EMAIL]" => 'bar@foo.com', 
-                     :replace_interests => true, :id => "my-list-id"}
+                     :merge_vars => {"EMAIL" => 'bar@foo.com'},
+                     :replace_interests => "true", :id => "my-list-id"}
       mock_chimp_post(:listUpdateMember, form_params)
       @list.update_members(member, :replace_interests => true)
     end
 
     should "accept single member's email address change as list" do
       members = [{:email => "foo@bar.com", :new_email => "bar@foo.com"}]
-      form_params = {:email_address => "foo@bar.com", 
-                     "merge_vars[EMAIL]" => 'bar@foo.com', 
-                     :replace_interests => true, :id => "my-list-id"}
+      form_params = {
+        :email_address => "foo@bar.com", 
+        :merge_vars => {'EMAIL' => 'bar@foo.com'}, 
+        :replace_interests => "true", :id => "my-list-id"
+      }
       mock_chimp_post(:listUpdateMember, form_params)
       @list.update_members(members, :replace_interests => true)
     end
 
     should "update multiple members emails addresses" do
-      members = [{:email => "foo@bar.com", :new_email => "bar@foo.com"},
+      members = [
+                 {:email => "foo@bar.com", :new_email => "bar@foo.com"},
                  {:email => "spock@vulcan.com", :new_email => "sylar@heroes.com"}
                 ]
-      form_params = {:email_address => "foo@bar.com", 
-                     "merge_vars[EMAIL]" => 'bar@foo.com', 
-                     :replace_interests => true, :id => "my-list-id"}
+      form_params = {
+        :email_address => "foo@bar.com", 
+        :merge_vars => {"EMAIL" => 'bar@foo.com'},
+        :replace_interests => "true", :id => "my-list-id"
+      }
       mock_chimp_post(:listUpdateMember, form_params)
-      form_params = {:email_address => "spock@vulcan.com", 
-                     "merge_vars[EMAIL]" => 'sylar@heroes.com', 
-                     :replace_interests => true, :id => "my-list-id"}
+      form_params = {
+        :email_address => "spock@vulcan.com", 
+        :merge_vars => {'EMAIL' => 'sylar@heroes.com'}, 
+        :replace_interests => "true", :id => "my-list-id"
+      }
       mock_chimp_post(:listUpdateMember, form_params)
       @list.update_members(members, :replace_interests => true)
     end
