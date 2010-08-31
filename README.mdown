@@ -19,6 +19,5 @@ For more information, [check the documentation](http://rdoc.info/projects/rubypo
 
 ## Credits & Contributions
 
-[David Heath](http://davidheath.org/)
-
-[Maxime Guilbot](http://github.com/maxime)
+* [David Heath](http://davidheath.org/)
+* [Maxime Guilbot](http://github.com/maxime)
