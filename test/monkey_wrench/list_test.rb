@@ -38,7 +38,7 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
       
       should "send welcome email" do
         form_params = {:merge_vars => {"FOO" => "bar"}, :id => "my-list-id", 
-                       :email => "mail@chimp.com", :type => "html",
+                       :email_address => "mail@chimp.com", :type => "html",
                        :send_welcome => "true"}
         mock_chimp_post(:listSubscribe, form_params)
 
@@ -81,7 +81,7 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
                         :double_optin => "false", 
                         :id => "my-list-id",
                         :send_welcome => "true",
-                        :email => "mail@chimp.com" }
+                        :email_address => "mail@chimp.com" }
         mock_chimp_post(:listSubscribe, form_params)
 
         params = { :type => :html,
