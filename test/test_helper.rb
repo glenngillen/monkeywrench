@@ -34,8 +34,8 @@ class Test::Unit::TestCase
     uri = uri_for_remote_method(remote_method)
     sequence.each do |response|
       response_body = canned_response(fixture_filename(response[:fixture] || remote_method, response[:is_success]))
-      stub_request(:post, uri).with(:body => response[:params])
-        .to_return(:body => response_body, :headers => {'Content-Type' => 'application/json'})
+      stub_request(:post, uri).with(:body => response[:params]).
+        to_return(:body => response_body, :headers => {'Content-Type' => 'application/json'})
     end
   end
 

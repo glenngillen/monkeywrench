@@ -17,14 +17,14 @@ Gem::Specification.new do |s|
     s.specification_version = 2
   
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency('json', '= 1.1.9')
+      s.add_runtime_dependency('yajl-ruby', '= 0.7.7')
       s.add_runtime_dependency('httparty', '= 0.4.5')
     else
-      s.add_dependency('json', '= 1.1.9')
+      s.add_dependency('yajl-ruby', '= 0.7.7')
       s.add_dependency('httparty', '= 0.4.5')
     end
   else
-    s.add_dependency('json', '= 1.1.9')
+    s.add_dependency('yajl-ruby', '= 0.7.7')
     s.add_dependency('httparty', '= 0.4.5')
   end
 end
