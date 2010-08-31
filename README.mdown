@@ -16,3 +16,8 @@ From there you've got a rich API for managing Lists and Members. To subscribe a 
 ## Further Reading
 
 For more information, [check the documentation](http://rdoc.info/projects/rubypond/monkeywrench)
+
+## Credits & Contributions
+
+[David Heath](http://davidheath.org/)
+[Maxime Guilbot](http://github.com/maxime)
