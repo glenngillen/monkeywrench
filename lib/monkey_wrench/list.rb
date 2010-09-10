@@ -264,7 +264,7 @@ module MonkeyWrench
       end
 
       def batch_size
-        5000
+        1000
       end
 
       def each_batch(subscribers, batch_size, &block) 
@@ -296,8 +296,8 @@ module MonkeyWrench
       end
 
       def timeout_for_batch(batch)
-        # 5 mins for a batch of 5000
-        ((batch.size.to_f / 5000) * (5 * 60)).to_i
+        # 5 mins for a batch of 1000
+        ((batch.size.to_f / 1000) * (5 * 60)).to_i
       end
 
       def subscribe_one_at_a_time(subscribers, opts)
