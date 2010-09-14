@@ -18,13 +18,13 @@ Gem::Specification.new do |s|
   
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency('yajl-ruby', '= 0.7.7')
-      s.add_runtime_dependency('httparty', '= 0.4.5')
+      s.add_runtime_dependency('httparty', '= 0.6.1')
     else
       s.add_dependency('yajl-ruby', '= 0.7.7')
-      s.add_dependency('httparty', '= 0.4.5')
+      s.add_dependency('httparty', '= 0.6.1')
     end
   else
     s.add_dependency('yajl-ruby', '= 0.7.7')
-    s.add_dependency('httparty', '= 0.4.5')
+    s.add_dependency('httparty', '= 0.6.1')
   end
 end
