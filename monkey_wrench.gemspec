@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.version = '0.1.0'
   s.name = "monkey_wrench"
-  s.files = ["README", "Rakefile"]
+  s.files = ["README.mdown", "Rakefile"]
   s.files += Dir["lib/**/*.rb","test/**/*"]
   s.summary = "A ruby wrapper for the Mailchimp API"
   s.description = "A ruby API for managing lists, campaigns, subscribers, etc. within Mailchimp (http://www.mailchimp.com/)"
