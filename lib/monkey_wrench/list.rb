@@ -12,14 +12,6 @@ module MonkeyWrench
     def self.find_by_name(list_name)
       lists = find_all.detect{|list| list.name == list_name}
     end
-
-    def ==(other_list)
-      other_list.is_a?(self.class) && self.id == other_list.id
-    end
-
-    def self.find(id)
-      new(:id => id)
-    end
     
     # Will compare another list against the current one and return true if 
     # they are the same (based on list ID)
