@@ -30,7 +30,7 @@ class Test::Unit::TestCase
     "http://my-dc.api.mailchimp.com/1.2/?#{query_string}"
   end
 
-  def mock_chimp_posts(remote_method, sequence) 
+  def mock_chimp_posts(remote_method, sequence)
     uri = uri_for_remote_method(remote_method)
     sequence.each do |response|
       response_body = canned_response(fixture_filename(response[:fixture] || remote_method, response[:is_success]))

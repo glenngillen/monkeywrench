@@ -11,12 +11,12 @@ module MonkeyWrench
     @@apikey = nil
     @@datacenter = nil
     @@dryrun = false
-    
+
     class << self
       def default_query_params
         { :output => "json", :apikey=> @@apikey}
       end
-      
+
       def base_uri
         "http://#{datacenter}.api.mailchimp.com/1.2/"
       end
@@ -36,7 +36,7 @@ module MonkeyWrench
           end
         end
       end
-      
+
       def post(params, http_options = {})
         if @@dryrun
           puts "POST #{base_uri} #{params.merge(default_query_params).inspect}"
@@ -50,10 +50,10 @@ module MonkeyWrench
           end
         end
       end
-      
+
       def handle_errors(objects)
         return objects unless objects.respond_to?(:has_key?)
-        
+
         if objects.has_key?("error")
           objects.replace({ "error" => MonkeyWrench::Error.new(objects['error'], objects['code']) })
         elsif objects.has_key?("errors")
@@ -69,12 +69,12 @@ module MonkeyWrench
       def apikey
         @@apikey
       end
-      
+
       def datacenter
         @@datacenter
       end
     end
-    
+
     private
       def self.robustly(http_options, &block)
         retry_limit = http_options[:retry_limit] || default_retry_limit
@@ -94,10 +94,9 @@ module MonkeyWrench
       def get(*args)
         self.class.get(*args)
       end
-    
+
       def post(*args)
         self.class.post(*args)
       end
-    
   end
 end
