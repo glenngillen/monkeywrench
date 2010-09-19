@@ -3,7 +3,7 @@ require 'cgi'
 module MonkeyWrench
   class List < MonkeyWrench::Base
     # Finds a given list by name
-    # 
+    #
     # @example
     #   MonkeyWrench::List.find_by_name("My Example List")
     #
@@ -12,7 +12,7 @@ module MonkeyWrench
     def self.find_by_name(list_name)
       lists = find_all.detect{|list| list.name == list_name}
     end
-    
+
     # Will compare another list against the current one and return true if 
     # they are the same (based on list ID)
     #
@@ -36,15 +36,15 @@ module MonkeyWrench
     # @param [String] id the unique Mailchimp list ID
     # @return [MonkeyWrench::List] the list
     def self.find(id)
-      new(:id => id)
+      find_all.find{|e| e.id == id}
     end
-    
+
     # Finds all lists
     #
     # @example
     #   MonkeyWrench::List.find_all
     #
-    # @return [Array<MonkeyWrench::List>] 
+    # @return [Array<MonkeyWrench::List>]
     def self.find_all
       @@lists ||= post({ :method => "lists" }).map do |list|
         List.new(list)
@@ -54,7 +54,7 @@ module MonkeyWrench
     class << self
       alias :all :find_all
     end
-    
+
     # Returns all members for this list
     #
     # @example Find all members that have unsubscribed in the last 24 hours:
@@ -83,7 +83,7 @@ module MonkeyWrench
           MonkeyWrench::Member.new(response_user)
         end
       end
-    end 
+    end
 
     # Enumerates over each member and executes the provided block. Will 
     # automatically page and batch requests for members.
@@ -96,7 +96,7 @@ module MonkeyWrench
     #   end
     #
     # @param [Proc] &block code to execute for each member
-    def each_member(&block) 
+    def each_member(&block)
       page = 0
       loop do
         batch = members(:start => page, :limit => 15000)
@@ -107,7 +107,7 @@ module MonkeyWrench
         page += 1
       end
     end
-    
+
     # Updates details of list members
     #
     # @example Update a single member's email address
@@ -140,7 +140,7 @@ module MonkeyWrench
         post(options.merge(mailchimp_args))
       end
     end
-    
+
     # Find a member in this list with the given email address
     #
     # @example
@@ -193,7 +193,7 @@ module MonkeyWrench
         return { :success => 1, :errors => []}
       end
     end
-    
+
     # Unsubscribes a person (or list of people) from the list
     #
     # @example Unsubscribe a single user
@@ -222,7 +222,7 @@ module MonkeyWrench
       return { :success => response["success_count"],
                :errors => response["errors"] }
     end
-    
+
     # Will flag the email(s) as opted-out for all future mailing for this list
     #
     # @example Opt-out a single user
@@ -236,17 +236,17 @@ module MonkeyWrench
     # @param [String, Array<String>] email address(es) of people to opt-out.
     # @return [Hash] contains 2 keys. :success contains the number of successful actions, :error a list of all errors.
     def opt_out(emails)
-      emails = [*emails]      
+      emails = [*emails]
       subscribe(emails.map{|email| { :email => email }})
       unsubscribe(emails, :send_goodbye => false, :send_notify => false)
     end
-  
+
     private
       def self.reserved_keys
         [:email, :type, :double_optin, :update_existing, :replace_interests, 
          :send_welcome, :emails, :send_notify, :send_goodbye, :delete_member]
       end
-      
+
       def subscribe_many(subscribers, opts = {})
         if opts[:send_welcome]
           subscribe_one_at_a_time(subscribers, opts)
