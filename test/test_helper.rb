@@ -6,9 +6,9 @@ require 'mocha'
 require 'webmock/test_unit'
 require 'yajl/json_gem'
 
-begin 
-  require "redgreen"
-rescue LoadError; 
+begin
+  require 'redgreen'
+rescue LoadError;
 end
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
@@ -42,7 +42,7 @@ class Test::Unit::TestCase
   def mock_chimp_post(remote_method, post_params = {}, is_success = true, fixture = nil)
     mock_chimp_posts remote_method, [{:params => post_params, :is_success => is_success, :fixture => fixture}]
   end
-  
+
   def escape(string)
     URI.escape(string, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
   end
@@ -63,5 +63,4 @@ class Test::Unit::TestCase
   def fixture_path(filename)
     File.join(File.dirname(__FILE__), "fixtures", filename)
   end
-  
 end
