@@ -22,6 +22,7 @@ class Test::Unit::TestCase
 
   def setup_config
     MonkeyWrench::Config.new(:apikey => "my-key", :datacenter => "my-dc")
+    MonkeyWrench::List.clear!
   end
 
   def uri_for_remote_method(remote_method) 

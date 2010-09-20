@@ -34,6 +34,16 @@ module MonkeyWrench
       end
     end
 
+    # Clears the List cache
+    #
+    # @example
+    #   MonkeyWrench::List.clear!
+    #
+    # @return nil
+    def self.clear!
+      @@lists = nil
+    end
+
     class << self
       alias :all :find_all
     end
