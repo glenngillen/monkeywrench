@@ -19,6 +19,18 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
         assert_equal nil, list
       end
     end
+    context "finding a list by name" do
+      should "find a single list by name" do
+        mock_chimp_post(:lists)
+        list = MonkeyWrench::List.find_by_name("A test list")
+        assert_equal MonkeyWrench::List.new(:id => "my-list-id"), list
+      end
+      should "return nil if the list doesn't exist" do
+        mock_chimp_post(:lists)
+        list = MonkeyWrench::List.find_by_name("An imaginary list")
+        assert_equal nil, list
+      end
+    end
   end
   context "subscribing to a list" do
     setup do
