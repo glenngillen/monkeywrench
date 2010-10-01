@@ -23,16 +23,16 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
         assert_equal expected, @list.subscribe(subscribers)
       end
       
-      should "split more than five thousand subscribers into batches" do
-        subscribers = (1..5004).map do |i|
+      should "split more than one thousand subscribers into batches" do
+        subscribers = (1..1004).map do |i|
           {:email => "mail#{i}@chimp.com", :type => :html}
         end
         response_sequence = [
-                             {:body => canned_response('listBatchSubscribe5000_success.json'), :headers => {'Content-Type' => 'application/json'}},
+                             {:body => canned_response('listBatchSubscribe1000_success.json'), :headers => {'Content-Type' => 'application/json'}},
                              {:body => canned_response('listBatchSubscribe4_success.json'), :headers => {'Content-Type' => 'application/json'}}
                             ]
         stub_request(:post, uri_for_remote_method('listBatchSubscribe')).to_return(response_sequence)
-        expected = {:success => 5004, :errors => []}      
+        expected = {:success => 1004, :errors => []}      
         assert_equal expected, @list.subscribe(subscribers)
       end
       
