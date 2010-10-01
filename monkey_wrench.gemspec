@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.version = '0.1.0'
   s.name = "monkey_wrench"
-  s.files = ["README", "Rakefile"]
+  s.files = ["README.mdown", "Rakefile"]
   s.files += Dir["lib/**/*.rb","test/**/*"]
   s.summary = "A ruby wrapper for the Mailchimp API"
   s.description = "A ruby API for managing lists, campaigns, subscribers, etc. within Mailchimp (http://www.mailchimp.com/)"
@@ -18,13 +18,13 @@ Gem::Specification.new do |s|
   
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency('yajl-ruby', '= 0.7.7')
-      s.add_runtime_dependency('httparty', '= 0.4.5')
+      s.add_runtime_dependency('httparty', '= 0.6.1')
     else
       s.add_dependency('yajl-ruby', '= 0.7.7')
-      s.add_dependency('httparty', '= 0.4.5')
+      s.add_dependency('httparty', '= 0.6.1')
     end
   else
     s.add_dependency('yajl-ruby', '= 0.7.7')
-    s.add_dependency('httparty', '= 0.4.5')
+    s.add_dependency('httparty', '= 0.6.1')
   end
 end
