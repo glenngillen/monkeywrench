@@ -83,7 +83,7 @@ module MonkeyWrench
           begin
             attempts += 1
             return yield
-          rescue Timeout::Error => e
+          rescue Errno::ECONNREFUSED, Timeout::Error => e
             if attempts == retry_limit
               raise e
             else
