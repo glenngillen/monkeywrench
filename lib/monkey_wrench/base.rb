@@ -86,6 +86,8 @@ module MonkeyWrench
           rescue Timeout::Error => e
             if attempts == retry_limit
               raise e
+            else
+              Kernel.sleep(60 * 3)
             end
           end
         end

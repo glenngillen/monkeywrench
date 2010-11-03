@@ -8,7 +8,8 @@ class MonkeyWrench::BaseTest < Test::Unit::TestCase
       retries = sequence('retries')
       response = mock('')
       response.stubs(:parsed_response).returns("the response")
-      MonkeyWrench::Base.stubs(:base_uri).returns('http://example.com');
+      Kernel.stubs(:sleep).with(180).returns(180)
+      MonkeyWrench::Base.stubs(:base_uri).returns('http://example.com')
       HTTParty::Request.any_instance.expects(:perform).in_sequence(retries).raises(Timeout::Error)
       HTTParty::Request.any_instance.expects(:perform).in_sequence(retries).raises(Timeout::Error)
       HTTParty::Request.any_instance.expects(:perform).in_sequence(retries).returns(response)
@@ -19,7 +20,8 @@ class MonkeyWrench::BaseTest < Test::Unit::TestCase
       retries = sequence('retries')
       response = mock('')
       response.stubs(:parsed_response).returns("the response")
-      MonkeyWrench::Base.stubs(:base_uri).returns('http://example.com');
+      MonkeyWrench::Base.stubs(:base_uri).returns('http://example.com')
+      Kernel.stubs(:sleep).with(180).returns(180)
       HTTParty::Request.any_instance.expects(:perform).in_sequence(retries).raises(Timeout::Error)
       HTTParty::Request.any_instance.expects(:perform).in_sequence(retries).raises(Timeout::Error)
       assert_raise Timeout::Error do
@@ -33,7 +35,8 @@ class MonkeyWrench::BaseTest < Test::Unit::TestCase
       retries = sequence('retries')
       response = mock('')
       response.stubs(:parsed_response).returns("the response")
-      MonkeyWrench::Base.stubs(:base_uri).returns('http://example.com');
+      MonkeyWrench::Base.stubs(:base_uri).returns('http://example.com')
+      Kernel.stubs(:sleep).with(180).returns(180)
       HTTParty::Request.any_instance.expects(:perform).in_sequence(retries).raises(Timeout::Error)
       HTTParty::Request.any_instance.expects(:perform).in_sequence(retries).raises(Timeout::Error)
       HTTParty::Request.any_instance.expects(:perform).in_sequence(retries).returns(response)
@@ -44,7 +47,8 @@ class MonkeyWrench::BaseTest < Test::Unit::TestCase
       retries = sequence('retries')
       response = mock('')
       response.stubs(:parsed_response).returns("the response")
-      MonkeyWrench::Base.stubs(:base_uri).returns('http://example.com');
+      MonkeyWrench::Base.stubs(:base_uri).returns('http://example.com')
+      Kernel.stubs(:sleep).with(180).returns(180)
       HTTParty::Request.any_instance.expects(:perform).in_sequence(retries).raises(Timeout::Error)
       HTTParty::Request.any_instance.expects(:perform).in_sequence(retries).raises(Timeout::Error)
       assert_raise Timeout::Error do
