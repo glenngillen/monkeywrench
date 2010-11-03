@@ -23,16 +23,18 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
         assert_equal expected, @list.subscribe(subscribers)
       end
       
-      should "split more than five thousand subscribers into batches" do
-        subscribers = (1..5004).map do |i|
+      should "split more than one thousand subscribers into batches" do
+        subscribers = (1..1004).map do |i|
           {:email => "mail#{i}@chimp.com", :type => :html}
         end
         response_sequence = [
-                             {:body => canned_response('listBatchSubscribe5000_success.json'), :headers => {'Content-Type' => 'application/json'}},
-                             {:body => canned_response('listBatchSubscribe4_success.json'), :headers => {'Content-Type' => 'application/json'}}
+                             { :body => '{"success_count":1000,"error_count":0,"errors":[]}', 
+                               :headers => {'Content-Type' => 'application/json'}},
+                             { :body => '{"success_count":4,"error_count":0,"errors":[]}', 
+                               :headers => {'Content-Type' => 'application/json'}}
                             ]
         stub_request(:post, uri_for_remote_method('listBatchSubscribe')).to_return(response_sequence)
-        expected = {:success => 5004, :errors => []}      
+        expected = {:success => 1004, :errors => []}      
         assert_equal expected, @list.subscribe(subscribers)
       end
       
@@ -99,7 +101,7 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
     end    
   end
 
-  context "unsubscribing to a list" do
+  context "unsubscribing from a list" do
     setup do
       setup_config
       mock_chimp_post(:lists)
@@ -154,6 +156,29 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
 
         expected = {:success => 1, :errors => []}      
         assert_equal expected, @list.unsubscribe("mail@chimp.com")
+      end
+    end
+
+    context "more than 1,000 unsubscribes" do
+      should "split into batches of 1000" do
+        batch1 = {
+          :id => "my-list-id",
+          "emails" => (1..1000).map {|i| "mail" + ('%04d' % i) + "@example.com"}
+        }
+        batch2 = {
+          "emails" => ["mail1001@example.com"],
+          :id => "my-list-id"
+        }
+        stub_request(:post, uri_for_remote_method('listBatchUnsubscribe'))
+          .to_return(:body => '{"success_count":1000,"error_count":0,"errors":[]}',
+                     :headers => {'Content-Type' => 'application/json'})
+          .times(1).then
+          .to_return(:body => '{"success_count":1,"error_count":0,"errors":[]}',
+                     :headers => {'Content-Type' => 'application/json'})
+        emails_to_unsubscribe = (1..1003).map {|i| "mail" + ('%04d' % i) + "@example.com"}
+      
+        expected = {:success => 1001, :errors => []}
+        assert_equal expected, @list.unsubscribe(emails_to_unsubscribe)
       end
     end
   end

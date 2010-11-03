@@ -219,16 +219,13 @@ module MonkeyWrench
     # @option opts [Boolean] :send_notify (false) send the unsubscribe notification email to the address defined in the list email notification settings.
     # @return [Hash] contains 2 keys. :success contains the number of successful actions, :error a list of all errors.
     def unsubscribe(emails, opts = {})
-      emails = [*emails]
-      params = { :method => "listBatchUnsubscribe", 
-                 :id => self.id }
-      params[:delete_member] = opts[:delete_member] if opts.has_key?(:delete_member)
-      params[:send_goodbye] = opts[:send_goodbye] if opts.has_key?(:send_goodbye)
-      params[:send_notify] = opts[:send_notify] if opts.has_key?(:send_notify)
-      params.merge!({ :emails => emails }.to_mailchimp)
-      response = post(params)
-      return { :success => response["success_count"],
-               :errors => response["errors"] }
+      cumulative_response = { :success => 0, :errors => [] }
+      each_batch(emails, 1000) do |batch, i|
+        response = unsubscribe_one_batch(batch, opts)
+        cumulative_response[:success] += (response["success_count"] || 0)
+        cumulative_response[:errors] += (response["errors"] || [])
+      end
+      cumulative_response
     end
     
     # Will flag the email(s) as opted-out for all future mailing for this list
@@ -295,9 +292,20 @@ module MonkeyWrench
         post(params, :timeout => timeout_for_batch(subscribers))
       end
 
+      def unsubscribe_one_batch(emails, opts)
+        emails = [*emails]
+        params = { :method => "listBatchUnsubscribe", 
+                   :id => self.id }
+        params[:delete_member] = opts[:delete_member] if opts.has_key?(:delete_member)
+        params[:send_goodbye] = opts[:send_goodbye] if opts.has_key?(:send_goodbye)
+        params[:send_notify] = opts[:send_notify] if opts.has_key?(:send_notify)
+        params.merge!({ :emails => emails }.to_mailchimp)
+        post(params, :timeout => timeout_for_batch(emails))
+      end
+
       def timeout_for_batch(batch)
         # 5 mins for a batch of 1000
-        ((batch.size.to_f / 1000) * (5 * 60)).to_i
+        ((batch.size.to_f / 1000) * (5 * 60)).to_i + 30
       end
 
       def subscribe_one_at_a_time(subscribers, opts)
