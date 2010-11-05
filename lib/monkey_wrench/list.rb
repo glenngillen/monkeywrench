@@ -169,6 +169,23 @@ module MonkeyWrench
       end
     end
 
+    # Check if an email has subscribed to the list
+    #
+    # @example
+    #   list = MonkeyWrench::List.find("0a649eafc3")
+    #   list.member?("glenn@rubypond.com")
+    #
+    # @param [String] email members email address
+    # @return [Boolean]
+    def member?(email)
+      response = post(:id => self.id, :method => "listMemberInfo", :email_address => email)
+      if response['error']
+        false
+      else
+        true
+      end
+    end
+
     # Subscribes a new member to the list
     #
     # @example Subscribe a new email address

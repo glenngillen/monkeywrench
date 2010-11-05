@@ -383,4 +383,23 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
     end
   end
 
+  context "checking for user subscription" do
+    setup do
+      setup_config
+      mock_chimp_post(:lists)
+      @list = MonkeyWrench::List.find_by_name("A test list")
+    end
+
+    should "return true if found" do
+      form_params = {:email_address => "david@email.com", :id => "my-list-id"}
+      mock_chimp_post(:listMemberInfo, form_params)
+      assert @list.member?("david@email.com")
+    end
+
+    should "return false if not found" do
+      form_params = {:email_address => "asdf-not-david@email.com", :id => "my-list-id"}
+      mock_chimp_post(:listMemberInfo, form_params, false)
+      assert !@list.member?("asdf-not-david@email.com")
+    end
+  end
 end
