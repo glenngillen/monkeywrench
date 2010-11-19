@@ -50,9 +50,20 @@ module MonkeyWrench
         List.new(list)
       end
     end
-
+    
     class << self
       alias :all :find_all
+    end
+
+    # Clears the List cache (results from List.find_all are cached for
+    # performance reasons)
+    #
+    # @example
+    #   MonkeyWrench::List.clear!
+    #
+    # @return nil
+    def self.clear!
+      @@lists = nil
     end
 
     # Returns all members for this list

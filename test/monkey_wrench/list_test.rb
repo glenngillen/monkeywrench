@@ -19,6 +19,7 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
         assert_equal nil, list
       end
     end
+    
     context "finding a list by name" do
       should "find a single list by name" do
         mock_chimp_post(:lists)
@@ -32,7 +33,50 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
         assert_equal nil, list
       end
     end
+    
+    context "finding all lists" do
+      setup do
+        setup_config
+      end
+      should "return an empty array if no lists exist" do
+        mock_chimp_post(:lists, {}, true, "listsEmpty")
+        lists = MonkeyWrench::List.find_all
+        assert_equal [], lists
+      end
+      
+      should "return an array of lists" do
+        mock_chimp_post(:lists)
+        lists = MonkeyWrench::List.find_all
+        expected = [MonkeyWrench::List.new(:id => "my-list-id")]
+        assert_equal expected, lists
+      end
+    end
+    
+    context "caching" do
+      setup do
+        setup_config
+      end
+      
+      should "be cleared when #clear! is called" do
+        mock_chimp_post(:lists)
+        MonkeyWrench::List.find_all
+        MonkeyWrench::List.clear!
+        mock_chimp_post(:lists, {}, true, "listsEmpty")
+        lists = MonkeyWrench::List.find_all
+        assert_equal [], lists
+      end
+      
+      should "cache the list of lists" do
+        mock_chimp_post(:lists)
+        MonkeyWrench::List.find_all
+        mock_chimp_post(:lists, {}, true, "listsEmpty")
+        lists = MonkeyWrench::List.find_all
+        expected = [MonkeyWrench::List.new(:id => "my-list-id")]
+        assert_equal expected, lists
+      end
+    end
   end
+  
   context "subscribing to a list" do
     setup do
       setup_config
