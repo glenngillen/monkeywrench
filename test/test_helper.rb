@@ -4,7 +4,6 @@ require 'shoulda'
 require 'net/http'
 require 'mocha'
 require 'webmock/test_unit'
-require 'yajl/json_gem'
 
 begin
   require 'redgreen'

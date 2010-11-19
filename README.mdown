@@ -1,7 +1,17 @@
 # MonkeyWrench
-MonkeyWrench is a rubyesque API for interfacing with [Mailchimp](http://www.mailchimp.com) (or show me some love by registering [via my affiliate link](http://eepurl.com/Ge71)).
+MonkeyWrench is a rubyesque API for interfacing with [Mailchimp](http://www.mailchimp.com) (or show me some love by registering [via my affiliate link](http://eepurl.com/Ge71)). It makes managing a mailing list, adding/removing subscribers, and setting up autoresponders so easy that even a monkey could do it.
+
+The API provided by MonkeyWrench takes an idiomatic ruby approach where possible, so supported parameters and options may differ slightly to what is documented in the official Mailchimp API documentation. Where possible, refer to the MonkeyWrench docs.
 
 ## Getting Started
+
+### Installation
+
+The easiest way to get started is to install the gem:
+
+    gem install monkey_wrench
+    
+### Usage
 
 To get started, you need to first connect to the appropriate datacenter with your API key:
 
@@ -17,8 +27,52 @@ From there you've got a rich API for managing Lists and Members. To subscribe a 
 
 For more information, [check the documentation](http://rdoc.info/projects/rubypond/monkeywrench)
 
+## Compatibility
+
+Tested on the following versions:
+
+* 1.8.7
+* 1.9.2
+* Ruby Enterprise Edition 1.8.7
+* Rubinius 1.1.1
+* JRuby 1.5.5
+
+It may work in 1.8.6 too, but a test dependency (WebMock) won't work so tests aren't currently automated against that version.
+
+## Status
+
+The library is currently under development, but in production use for many clients. It's still currently using the 1.2 version of the Mailchimp API (Mailchimp haven't made any deprecation announcements yet, and they still support 1.1 so it shouldn't be an issue any time soon). I'm working towards a switch to 1.3.
+
+## Contributing
+
+Patches and pull requests are gladly accepted. Please make sure that you include associated tests and documentation and that your commit messages are brief but descriptive.
+
 ## Credits & Contributions
 
 * [David Heath](https://davidheath.org/)
 * [Maxime Guilbot](https://github.com/maxime)
 * [Keith Marcum](https://github.com/kamarcum)
+
+## License
+
+MonkeyWrench is released under the MIT license.
+
+Copyright (c) 2010 Glenn Gillen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.

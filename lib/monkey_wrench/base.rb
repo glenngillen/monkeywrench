@@ -1,8 +1,3 @@
-begin
-  require 'yajl'
-rescue LoadError
-  require 'json'
-end
 require 'ostruct'
 module MonkeyWrench
   class Base < OpenStruct
