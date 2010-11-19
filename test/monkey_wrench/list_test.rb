@@ -19,6 +19,19 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
         assert_equal nil, list
       end
     end
+    context "finding a list by name" do
+      should "find a single list by name" do
+        mock_chimp_post(:lists)
+        list = MonkeyWrench::List.find_by_name("A test list")
+        assert_equal MonkeyWrench::List.new(:id => "my-list-id"), list
+      end
+
+      should "return nil if the list doesn't exist" do
+        mock_chimp_post(:lists)
+        list = MonkeyWrench::List.find_by_name("An imaginary list")
+        assert_equal nil, list
+      end
+    end
   end
   context "subscribing to a list" do
     setup do
@@ -317,14 +330,13 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
       assert_equal ["freetrial", "tutorials"], member.interests
     end
 
-   should "raise on error" do
-     form_params = {:email_address => "david@email.com", :id => "my-list-id"}
-     mock_chimp_post(:listMemberInfo, form_params, false)
-     assert_raises(MonkeyWrench::Error) do
-       @list.member("david@email.com")
-     end
-   end
-
+    should "raise on error" do
+      form_params = {:email_address => "david@email.com", :id => "my-list-id"}
+      mock_chimp_post(:listMemberInfo, form_params, false)
+      assert_raises(MonkeyWrench::Error) do
+        @list.member("david@email.com")
+      end
+    end
   end
 
 end
