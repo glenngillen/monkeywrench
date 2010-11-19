@@ -9,7 +9,7 @@ The API provided by MonkeyWrench takes an idiomatic ruby approach where possible
 
 The easiest way to get started is to install the gem:
 
-    gem install monkey_wrench
+    gem install monkeywrench
     
 ### Usage
 

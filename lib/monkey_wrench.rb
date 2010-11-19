@@ -1,10 +1,1 @@
-require "httparty"
-base_dir = File.join(File.dirname(__FILE__), "monkey_wrench")
-["base", "config", "hash", "list", "error", "member"].each do |lib|
-  require File.join(base_dir, lib)
-end
-
-begin
-  OpenStruct.class_eval { undef :id, :type }
-rescue NameError
-end
+require "#{File.dirname(__FILE__)}/monkeywrench"

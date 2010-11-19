@@ -3,7 +3,7 @@ require 'rake'
 require 'rake/gempackagetask'
 require 'rake/rdoctask'
 
-spec_data = File.open('monkey_wrench.gemspec').read
+spec_data = File.open('monkeywrench.gemspec').read
 spec = nil
 Thread.new do
   spec = eval("#{spec_data}")
