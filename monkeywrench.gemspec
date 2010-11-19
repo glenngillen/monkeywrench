@@ -1,12 +1,12 @@
 Gem::Specification.new do |s|
   s.version = '0.1.5'
-  s.name = "monkey_wrench"
+  s.name = "monkeywrench"
   s.files = ["README.mdown", "Rakefile"]
   s.files += Dir["lib/**/*.rb","test/**/*"]
   s.summary = "A ruby wrapper for the Mailchimp API"
   s.description = "A ruby API for managing lists, campaigns, subscribers, etc. within Mailchimp (http://www.mailchimp.com/)"
   s.email = "glenn@rubypond.com"
-  s.homepage = "http://github.com/rubypond/monkey_wrench"
+  s.homepage = "http://github.com/rubypond/monkeywrench"
   s.authors = ["Glenn Gillen"]
   s.test_files = Dir["test/**/*"]
   s.require_paths = [".", "lib"]
