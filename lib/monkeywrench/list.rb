@@ -197,7 +197,7 @@ module MonkeyWrench
     # @example Subscribe multiple new members
     #   subscribers = [{:email => "foo@bar.com", :type => :html},
     #                  {:email => "bar@foo.com", :type => :html}]
-    #   list.subscribe(subscribe, :send_welcome => true, :double_optin => false)
+    #   list.subscribe(subscribers, :send_welcome => true, :double_optin => false)
     #
     # @param [String, Hash, Array<Hash>] contact_details the email address or hash of values for the new member
     # @param [Hash] opts options when adding new member
@@ -278,7 +278,7 @@ module MonkeyWrench
       def subscribe_many(subscribers, opts = {})
         if opts[:send_welcome]
           subscribe_one_at_a_time(subscribers, opts)
-        else
+        else  
           subscribe_in_batches(subscribers, opts)
         end
       end
@@ -317,7 +317,9 @@ module MonkeyWrench
 
       def timeout_for_batch(batch)
         # 5 mins for a batch of 1000
-        ((batch.size.to_f / 1000) * (5 * 60)).to_i
+        wait_for = (batch.size.to_f / 1000 * 5 * 60).to_i
+        wait_for = 30 if wait_for < 30
+        wait_for
       end
 
       def subscribe_one_at_a_time(subscribers, opts)
