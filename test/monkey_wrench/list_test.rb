@@ -319,6 +319,7 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
     should "accept single member's email address change as hash" do
       member = {:email => "foo@bar.com", :new_email => "bar@foo.com"}
       form_params = {:email_address => "foo@bar.com", 
+                     :email => "foo@bar.com", 
                      :merge_vars => {"EMAIL" => 'bar@foo.com'},
                      :replace_interests => "true", :id => "my-list-id"}
       mock_chimp_post(:listUpdateMember, form_params)
@@ -329,6 +330,7 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
       members = [{:email => "foo@bar.com", :new_email => "bar@foo.com"}]
       form_params = {
         :email_address => "foo@bar.com", 
+        :email => "foo@bar.com", 
         :merge_vars => {'EMAIL' => 'bar@foo.com'}, 
         :replace_interests => "true", :id => "my-list-id"
       }
@@ -343,12 +345,14 @@ class MonkeyWrench::ListTest < Test::Unit::TestCase
                 ]
       form_params = {
         :email_address => "foo@bar.com", 
+        :email => "foo@bar.com", 
         :merge_vars => {"EMAIL" => 'bar@foo.com'},
         :replace_interests => "true", :id => "my-list-id"
       }
       mock_chimp_post(:listUpdateMember, form_params)
       form_params = {
         :email_address => "spock@vulcan.com", 
+        :email => "spock@vulcan.com", 
         :merge_vars => {'EMAIL' => 'sylar@heroes.com'}, 
         :replace_interests => "true", :id => "my-list-id"
       }

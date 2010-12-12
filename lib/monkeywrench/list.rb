@@ -142,11 +142,13 @@ module MonkeyWrench
     # @option options [Boolean] :replace_interests (true) replace the interest groups provided (will append interest groups to existing values when false).
     def update_members(members, options = {})
       members = members.is_a?(Array) ? members : [members]
+      options = options.dup
       options.merge!(:id => self.id, :method => "listUpdateMember")
       members.each do |member|
-        mailchimp_args = {:email_address => member[:email]}
-        member[:email] = member[:new_email]
-        member.delete(:new_email)
+        member = member.dup
+        mailchimp_args = {:email_address => member[:email], 
+                          :email => member[:email]}
+        member[:email] = member.delete(:new_email) if member[:new_email]
         mailchimp_args.merge!({ :merge_vars => member }.to_mailchimp)
         post(options.merge(mailchimp_args))
       end

@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.version = '0.1.6'
+  s.version = '0.1.7'
   s.name = "monkeywrench"
   s.files = ["README.mdown", "Rakefile"]
   s.files += Dir["lib/**/*.rb","test/**/*"]
