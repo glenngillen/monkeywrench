@@ -10,19 +10,19 @@ The API provided by MonkeyWrench takes an idiomatic ruby approach where possible
 The easiest way to get started is to install the gem:
 
     gem install monkeywrench
-    
+
 ### Usage
 
 To get started, you need to first connect to the appropriate datacenter with your API key:
 
-    MonkeyWrench::Config.new(:datacenter => "us1", 
+    MonkeyWrench::Config.new(:datacenter => "us1",
                              :apikey => "your-api-key-goes-here")
 
 From there you've got a rich API for managing Lists and Members. To subscribe a new user to a list simply do the following:
 
     list = MonkeyWrench::List.find_by_name("My Example List")
     list.subscribe("foo@bar.com")
-    
+
 ## Further Reading
 
 For more information, [check the documentation](http://rdoc.info/projects/rubypond/monkeywrench)
@@ -76,3 +76,5 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+[![Analytics](https://ga-beacon.appspot.com/UA-46840117-1/monkeywrench/readme?pixel)](https://github.com/igrigorik/ga-beacon)
